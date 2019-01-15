@@ -1,5 +1,6 @@
 # Linux Command Guide
 
+```yaml
 vim:
   copy_line: yy or Y
   delete_line: dd
@@ -62,3 +63,4 @@ docker:
   build: docker build -t <tag_name>:<version> <Dockerfile>
   run: docker run -d -i -t <container>
   exec: docker exec -it <container> | bash # Enter inside container bash
+```
