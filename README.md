@@ -1,10 +1,13 @@
 # Linux Command Guide
 
 ```yaml
+<<<<<<< HEAD
 
 check_os:
   cat /etc/*release | grep -i redhat|debian
 
+=======
+>>>>>>> a575d05a12e596cb9e67a074e66a0b0562b5eb16
 vim:
   copy_line: yy or Y
   delete_line: dd
@@ -67,6 +70,7 @@ docker:
   build: docker build -t <tag_name>:<version> <Dockerfile>
   run: docker run -d -i -t <container>
   exec: docker exec -it <container> | bash # Enter inside container bash
+<<<<<<< HEAD
 
 rhel:
   subscription:
@@ -85,4 +89,6 @@ git:
   git checkout -- <file | folder | commit_id > <HEAD~[number]>
   git reset <file |folder>
 
+=======
+>>>>>>> a575d05a12e596cb9e67a074e66a0b0562b5eb16
 ```
