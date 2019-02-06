@@ -1,5 +1,10 @@
 # Linux Command Guide
 
+```yaml
+
+check_os:
+  cat /etc/*release | grep -i redhat|debian
+
 vim:
   copy_line: yy or Y
   delete_line: dd
@@ -62,3 +67,22 @@ docker:
   build: docker build -t <tag_name>:<version> <Dockerfile>
   run: docker run -d -i -t <container>
   exec: docker exec -it <container> | bash # Enter inside container bash
+
+rhel:
+  subscription:
+    check: sudo subscription-manager status
+    #where: https://access.redhat.com/downloads/content/package-browser
+    repo_enable: subscription-manager repos --enable=<repositoryt> #Ex: -> rhel-7-server-optional-rpms
+
+
+git:
+  git init
+  git remote add -f origin https://github.com/andredsn/ArquiteturaSoftware.git
+  git add .
+  git commit -m "First commit"
+  git push origin master
+
+  git checkout -- <file | folder | commit_id > <HEAD~[number]>
+  git reset <file |folder>
+
+```
