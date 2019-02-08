@@ -2,8 +2,11 @@
 
 ```yaml
 groups:
+  create_group: groupadd <groupname>
+  add_group: usermod -aG <groupname> <username>
   entire_group_list: cut -d: -f1 /etc/group | sort
   specific_user: id -Gn <username>
+
 check_os:
   cat /etc/*release | grep -i redhat|debian
 
