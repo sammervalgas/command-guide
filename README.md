@@ -1,13 +1,12 @@
 # Linux Command Guide
 
 ```yaml
-<<<<<<< HEAD
-
+groups:
+  entire_group_list: cut -d: -f1 /etc/group | sort
+  specific_user: id -Gn <username>
 check_os:
   cat /etc/*release | grep -i redhat|debian
 
-=======
->>>>>>> a575d05a12e596cb9e67a074e66a0b0562b5eb16
 vim:
   copy_line: yy or Y
   delete_line: dd
@@ -70,14 +69,12 @@ docker:
   build: docker build -t <tag_name>:<version> <Dockerfile>
   run: docker run -d -i -t <container>
   exec: docker exec -it <container> | bash # Enter inside container bash
-<<<<<<< HEAD
 
 rhel:
   subscription:
     check: sudo subscription-manager status
     #where: https://access.redhat.com/downloads/content/package-browser
     repo_enable: subscription-manager repos --enable=<repositoryt> #Ex: -> rhel-7-server-optional-rpms
-
 
 git:
   git init
@@ -89,6 +86,4 @@ git:
   git checkout -- <file | folder | commit_id > <HEAD~[number]>
   git reset <file |folder>
 
-=======
->>>>>>> a575d05a12e596cb9e67a074e66a0b0562b5eb16
 ```
