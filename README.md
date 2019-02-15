@@ -48,16 +48,16 @@ proxy:
       }" >> ~/.bashrc && source ~/.bashrc
 
 auto_complete:
-  echo ' # mappings to have up and down arrow searching through history:
-  "\e[A": history-search-backward
-  "\e[B": history-search-forward
-  # mappings to have left and right arrow go left and right:
-  "\e[C": forward-char
-  "\e[D": backward-char
+echo ' # mappings to have up and down arrow searching through history:
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+# mappings to have left and right arrow go left and right:
+"\e[C": forward-char
+"\e[D": backward-char
 
-  # mapping to have [Tab] and [Shift]+[Tab] to cycle through all the possible completions:
-  "\t": menu-complete
-  "\e[Z": menu-complete-backward' >> ~/.inputrc
+# mapping to have [Tab] and [Shift]+[Tab] to cycle through all the possible completions:
+"\t": menu-complete
+"\e[Z": menu-complete-backward' >> ~/.inputrc
 
 
 link:
@@ -78,15 +78,49 @@ rhel:
     check: sudo subscription-manager status
     #where: https://access.redhat.com/downloads/content/package-browser
     repo_enable: subscription-manager repos --enable=<repositoryt> #Ex: -> rhel-7-server-optional-rpms
-
+pip:
+  installation:
+    pip install --upgrade pip
+    pip install docker-compose==1.9.0
+  search_list:
+    pip list --format=columns | grep docker
+---
 git:
-  git init
-  git remote add -f origin https://github.com/andredsn/ArquiteturaSoftware.git
-  git add .
-  git commit -m "First commit"
-  git push origin master
-
-  git checkout -- <file | folder | commit_id > <HEAD~[number]>
-  git reset <file |folder>
+  init:
+    git init
+  remote:
+    git remote add -f origin <remote_repository_url>
+  add:
+    git add .
+    git add -- <file>
+  commit:
+    git commit -m "First commit"
+    git commit -m -a "Commit with add"
+  remove:
+    git rm <file|folder>
+  push:
+    git push -u origin master
+  stash:
+    git stash
+    git stash apply
+    git stash pop
+  clone:
+    git clone <url_repo> <name_folder>
+  config:
+    # ~/.gitconfig
+    git config --global alias.st status # git st
+  revert:
+    git checkout -- <file | folder | commit_id > <HEAD~[number]>
+  reset:
+    git reset <file |folder>
+    git reset
+  log:
+    git log -- <file>
+    git log -p -2 --all --full-history -- *<file>*
+    git log after='2017-01-01' before='2018-01-01'
+---
+curl:
+  download:
+    curl -sSOL <urlfile>
 
 ```
