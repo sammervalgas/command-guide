@@ -1,15 +1,6 @@
 # Linux Command Guide
 
 ```yaml
-groups:
-  create_group: groupadd <groupname>
-  add_group: usermod -aG <groupname> <username>
-  entire_group_list: cut -d: -f1 /etc/group | sort
-  specific_user: id -Gn <username>
-
-check_os:
-  cat /etc/*release | grep -i redhat|debian
-
 vim:
   copy_line: yy or Y
   delete_line: dd
@@ -48,16 +39,16 @@ proxy:
       }" >> ~/.bashrc && source ~/.bashrc
 
 auto_complete:
-echo ' # mappings to have up and down arrow searching through history:
-"\e[A": history-search-backward
-"\e[B": history-search-forward
-# mappings to have left and right arrow go left and right:
-"\e[C": forward-char
-"\e[D": backward-char
+  echo ' # mappings to have up and down arrow searching through history:
+  "\e[A": history-search-backward
+  "\e[B": history-search-forward
+  # mappings to have left and right arrow go left and right:
+  "\e[C": forward-char
+  "\e[D": backward-char
 
-# mapping to have [Tab] and [Shift]+[Tab] to cycle through all the possible completions:
-"\t": menu-complete
-"\e[Z": menu-complete-backward' >> ~/.inputrc
+  # mapping to have [Tab] and [Shift]+[Tab] to cycle through all the possible completions:
+  "\t": menu-complete
+  "\e[Z": menu-complete-backward' >> ~/.inputrc
 
 
 link:
@@ -72,55 +63,11 @@ docker:
   build: docker build -t <tag_name>:<version> <Dockerfile>
   run: docker run -d -i -t <container>
   exec: docker exec -it <container> | bash # Enter inside container bash
+  inspect_images_in_use: docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=<container> -q)
+  copy: docker cp <container>:<source-folder-or-file> <destination>
 
-rhel:
-  subscription:
-    check: sudo subscription-manager status
-    #where: https://access.redhat.com/downloads/content/package-browser
-    repo_enable: subscription-manager repos --enable=<repositoryt> #Ex: -> rhel-7-server-optional-rpms
-pip:
-  installation:
-    pip install --upgrade pip
-    pip install docker-compose==1.9.0
-  search_list:
-    pip list --format=columns | grep docker
----
+
 git:
-  init:
-    git init
-  remote:
-    git remote add -f origin <remote_repository_url>
-  add:
-    git add .
-    git add -- <file>
-  commit:
-    git commit -m "First commit"
-    git commit -m -a "Commit with add"
-  remove:
-    git rm <file|folder>
-  push:
-    git push -u origin master
-  stash:
-    git stash
-    git stash apply
-    git stash pop
-  clone:
-    git clone <url_repo> <name_folder>
-  config:
-    # ~/.gitconfig
-    git config --global alias.st status # git st
-  revert:
-    git checkout -- <file | folder | commit_id > <HEAD~[number]>
-  reset:
-    git reset <file |folder>
-    git reset
-  log:
-    git log -- <file>
-    git log -p -2 --all --full-history -- *<file>*
-    git log after='2017-01-01' before='2018-01-01'
----
-curl:
-  download:
-    curl -sSOL <urlfile>
-
-```
+  recovery_detached:
+    $ git reflog
+    $ git checkout -b <branchName> <SHA-1 or HEAD~1>
