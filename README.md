@@ -56,16 +56,26 @@ link:
   unlink <folder|file>
 
 docker:
-  list-containers[all]: docker ps [-a]
-  list-images: docker images
-  remove-container: docker rm <container | $(docker ps -q)>
-  remove-images: docker rmi <image | $(docker images -q)>
-  build: docker build -t <tag_name>:<version> <Dockerfile>
-  run: docker run -d -i -t <container>
-  exec: docker exec -it <container> | bash # Enter inside container bash
-  inspect_images_in_use: docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=<container> -q)
-  copy: docker cp <container>:<source-folder-or-file> <destination>
-
+  list-containers[all]: 
+      docker ps [-a]
+  list-images: 
+      docker images
+  remove-container: 
+      docker rm <container | $(docker ps -q)>
+  remove-images: 
+      docker rmi <image | $(docker images -q)>
+  remove_untagged_images: 
+      docker rmi $(docker images -a | grep "^<none>" | awk '{print $3}') [--force]
+  build: 
+      docker build -t <tag_name>:<version> <Dockerfile>
+  run: 
+      docker run -d -i -t <container>
+  exec: 
+      docker exec -it <container> | bash # Enter inside container bash
+  inspect_images_in_use: 
+      docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=<container> -q)
+  copy: 
+      docker cp <container>:<source-folder-or-file> <destination>
 
 git:
   recovery_detached:
