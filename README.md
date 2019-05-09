@@ -201,4 +201,27 @@ curl:
   download:
     curl -sSOL [HTTP_URL]
 
+---
+sed:
+  # Creating a file to use sed
+  cat <<EOF >> sample-for-sed
+  001 history
+  002 blob
+  003 old_text
+  004 vim /tmp/test
+  
+  # Lets edit this file
+  EOF
+  
+# Quick link http://www.grymoire.com/Unix/Sed.html
+s = substitue
+g = global
+
+'/^$/ d' = Remove all spaces
+'s/\s[0-9]*//g' = Remove all numbers
+'s/old_text/new_text/g' = Remove all old_text to new_text
+'sed '0,/pattern/s/pattern/replacement/' filename' = Change first line ocurrency only.
+
+''
+
 ```
