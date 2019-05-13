@@ -38,8 +38,10 @@ virtualbox:
 ---
 disk:
   increase:
-    lvextend -L +1G /dev/mapper/example
-    xfs_growfs 
+    lsblk
+    df -h
+    lvextend -L +100G /dev/mapper/example
+    xfs_growfs /dev/mapper/example
 
 ---
 ssl:
