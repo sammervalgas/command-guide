@@ -29,11 +29,18 @@ vim:
   multiple_lines:
     copy: 7yy
     delete: 10dd
+
 ---
 virtualbox:
   guest_additions:
     sudo apt-get install virtualbox-guest-dkms virtualbox-guest-x11 linux-headers-$(uname -r)
     sudo reboot
+---
+disk:
+  increase:
+    lvextend -L +1G /dev/mapper/example
+    xfs_growfs 
+
 ---
 ssl:
   crt:
@@ -154,6 +161,10 @@ git:
   commit:
     git commit -m "First commit"
     git commit -m -a "Commit with add"
+    last_commit:
+      git show --name-only
+      git log --name-status HEAD^..HEAD
+      git diff-tree --no-commit-id --name-only -r HEAD^..HEAD
   checkout:
     switch: git checkout [BRANCH]
     branch: git checkout -b [BRANCH_NAME] [SHA1 | OLDEST_VERSION]
@@ -192,6 +203,10 @@ git:
     git log -- [FILE|FOLDER]
     git log -p -2 --all --full-history -- *[FILE|FOLDER]*
     git log after='2017-01-01' before='2018-01-01'
+    
+    git log --stat
+    git log --pretty=oneline | short | medium | full | fuller
+    
   recovery_detached:
     $ git reflog
     $ git checkout -b [BRANCH_NAME] [ID|HEAD~<NUMBER>]
