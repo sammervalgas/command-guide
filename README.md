@@ -1,5 +1,9 @@
+
+
 Linux Command Guide
 =============
+
+Note: [known-issues](known-issues.md) like knowledge base problems. :)
 
 ### Typology
 
