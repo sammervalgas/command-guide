@@ -16,9 +16,17 @@ groups:
   add_group: usermod -aG [GROUPNAME] [USERNAME]
   entire_group_list: cut -d: -f1 /etc/group | sort
   specific_user: id -Gn [USERNAME]
+
 ---
 check_os:
   cat /etc/*release | grep -i redhat|debian
+
+---
+hostname:
+  setting(Fedora):
+    hostnamectl -set-hostname [NAME]
+    hostnamectl status
+
 ---
 vim:
   copy_line: yy or Y
