@@ -91,6 +91,15 @@ ssh:
     ssh-keygen -t rsa # Do not set password to a passphrase
     ssh <user>@<server_ip> mkdir -p ~/.ssh
     cat ~/.ssh/id_rsa.pub | ssh <user>@<server_ip> 'cat >> .ssh/authorized_keys'
+
+  git_ssh:
+    # generate ssh
+    ssh-keygen -t rsa -b 4096 -C "$USER@$(hostname)"
+    # add agent
+    eval $(ssh-agent -s)
+    # add ssh key to the ssh-agent
+    ssh-add ~/.ssh/id_rsa
+
 ---
 proxy:
   add: export {http, https, ftp}_proxy="http://PROXY_SERVER:PORT"
@@ -217,10 +226,10 @@ git:
     git log -- [FILE|FOLDER]
     git log -p -2 --all --full-history -- *[FILE|FOLDER]*
     git log after='2017-01-01' before='2018-01-01'
-    
+
     git log --stat
     git log --pretty=oneline | short | medium | full | fuller
-    
+
   recovery_detached:
     $ git reflog
     $ git checkout -b [BRANCH_NAME] [ID|HEAD~<NUMBER>]
@@ -238,10 +247,10 @@ sed:
   002 blob
   003 old_text
   004 vim /tmp/test
-  
+
   # Lets edit this file
   EOF
-  
+
 # Quick link http://www.grymoire.com/Unix/Sed.html
 s = substitue
 g = global
