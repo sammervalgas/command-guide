@@ -54,6 +54,9 @@ disk:
     df -h
     lvextend -L +100G /dev/mapper/example
     xfs_growfs /dev/mapper/example
+  spaces_used:
+    cd /
+    du -sch *
 
 ---
 ssl:
