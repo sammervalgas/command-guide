@@ -59,6 +59,13 @@ disk:
     du -sch *
 
 ---
+remove:
+  dir: rm -r [DIRECTORY] [*=ALL]
+  file: rm -f [FILE] [*=ALL]
+  per_day: 
+    find [FOLDER] -mtime +1 -exec rm -f {} \;
+    find . -mtime +180 -delete;
+---
 ssl:
   crt:
     openssl genrsa 2048 > host.key
@@ -117,6 +124,7 @@ proxy:
       function unsetproxy() {
           unset {http,https,ftp}_proxy
       }" >> ~/.bashrc && source ~/.bashrc
+
 ---
 auto_complete:
 echo ' # mappings to have up and down arrow searching through history:
