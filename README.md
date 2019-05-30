@@ -273,4 +273,10 @@ g = global
 
 ''
 
+tricks:
+  hide_traces:
+    history -d $(history | tail -1 - | awk '{print $1}') | vi ~/.bash_history
+    for i in {$(history | tail -1 - | awk '{print $1}')..[END_POSITION]}; do history -d "$i"; done
+
+
 ```
