@@ -26,6 +26,12 @@ check_os:
   cat /etc/*release | grep -i redhat|debian
 
 ---
+cntlm:
+  # https://vijiboy.wordpress.com/2018/03/14/configure-cntlm-to-generate-hash-for-your-password-h-and-verify-m/
+  user_data: cntlm -H -u username -d domainname # /etc/cntlm.conf
+  check: cntlm -M
+
+---
 hostname:
   setting(Fedora):
     hostnamectl -set-hostname [NAME]
