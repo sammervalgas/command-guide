@@ -29,7 +29,7 @@ check_os:
 cntlm:
   # https://vijiboy.wordpress.com/2018/03/14/configure-cntlm-to-generate-hash-for-your-password-h-and-verify-m/
   user_data: cntlm -H -u username -d domainname # /etc/cntlm.conf
-  check: cntlm -M
+  check: cntlm -M http://google.com
 
 ---
 hostname:
@@ -170,6 +170,10 @@ docker:
     docker exec [CONTAINER_NAME] wget http://github.com/sammervalgas
   inspect_images_in_use:
     docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=[CONTAINER_NAME] -q)
+    docker inspect --format '{{ .NetworkSettings.IPAddress}}' [CONTAINER_NAME]
+    docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [CONTAINER_NAME]
+    docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [CONTAINER_NAME]
+
   copy-to-host:
     docker cp [CONTAINER_NAME]:[FILE|FOLDER] [DESTINATION]
   copy-to-container:
