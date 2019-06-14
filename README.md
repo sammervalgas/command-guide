@@ -182,7 +182,12 @@ docker:
     docker inspect --format '{{ .NetworkSettings.IPAddress}}' [CONTAINER_NAME]
     docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [CONTAINER_NAME]
     docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [CONTAINER_NAME]
-
+    
+    # (Inspect First From Array) 
+    # Get Docker Gateway
+    docker inspect network bridge
+    docker inspect -f '{{ (index .IPAM.Config 0).Gateway }}' bridge 
+    
   copy-to-host:
     docker cp [CONTAINER_NAME]:[FILE|FOLDER] [DESTINATION]
   copy-to-container:
