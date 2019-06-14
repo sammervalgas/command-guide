@@ -43,6 +43,7 @@ find:
   find / -iname [FILE|FOLDER] # case insensitive
   find . -name [FILE|FOLDER] -type d -exec rm -rf {} \; # Find and remove
   find [FOLDER] -ilname [FILE|FOLDER] -print 2>/dev/null # Find without permission denied print
+  find . ! -name [FILE|FOLDER] # Find except file name
   # More infos: http://www.hypexr.org/linux_find_help.php
 
 ---
