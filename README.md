@@ -192,7 +192,45 @@ docker:
     docker cp [CONTAINER_NAME]:[FILE|FOLDER] [DESTINATION]
   copy-to-container:
     docker cp [DESTINATION] [CONTAINER_NAME]:[FILE|FOLDER]
-
+  registry:
+    mkdir certs
+    cd certs
+    
+    #Generate rsa private key
+    openssl genrsa -out registry.docker.test.com.key 2048
+    
+    # Gerate CRS (Certificate Signing Request) 
+    openssl req -new -key registry.docker.test.com.key -out registry.docker.test.com.csr
+    
+    # Generate SSL Certificate (CRT) Self Sign.
+    openssl x509 -req -days 365 -in registry.docker.test.com.csr -signkey registry.docker.test.com.key -out registry.docker.test.com.crt
+    
+    # Create folder certs.d registry docker 
+    sudo mkdir -p /etc/docker/certs.d/registry.docker.test.com
+    
+    # Copy CRT into certs.d docker registry
+    sudo cp /home/$USER/certs/registry.docker.test.com.crt /etc/docker/certs.d/registry.docker.test.com/ca.crt
+    
+    # as root -> Set registry on hosts
+    echo "$(docker inspect -f '{{ (index .IPAM.Config 0).Gateway }}' bridge)    registry.docker.test.com" >> /etc/hosts
+    
+    # Run registry container
+    docker run -d -p 5000:5000 \
+    -v "/home/$USER/certs:/certs" \
+    -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.docker.test.com.crt \
+    -e REGISTRY_HTTP_TLS_KEY=/certs/registry.docker.test.com.key \
+    -v /opt/registry/data:/var/lib/registry \
+    --name registry registry:2
+    
+    # Check registry
+    curl -i https://registry.docker.test.com:5000/v2/
+    
+    # Docker pull and tag
+    docker pull redis:alpine; docker tag redis:alpine registry.docker.test.com:5000/redis:alpine
+    
+    # Push image to registry
+    docker push registry.docker.test.com:5000/redis:alpine
+    
 ---
 rhel:
   subscription:
