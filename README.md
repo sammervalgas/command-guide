@@ -73,6 +73,19 @@ disk:
     cd /
     du -sch *
 
+
+systemctl:
+  # Reload daemon
+  systemctl daemon-reload
+  
+  # Commands
+  systemctl status [PROCESS]
+  systemctl stop [PROCESS]
+  systemctl start [PROCESS]
+  systemctl restart [PROCESS]
+  systemctl show --property [PROPERTY] [PROCESS]
+  #systemctl show --property Environment docker
+  
 ---
 remove:
   dir: rm -r [DIRECTORY] [*=ALL]
@@ -193,8 +206,8 @@ docker:
   copy-to-container:
     docker cp [DESTINATION] [CONTAINER_NAME]:[FILE|FOLDER]
   registry:
-    mkdir certs
-    cd certs
+    mkdir -p /home/$USER/certs
+    cd /home/$USER/certs
     
     #Generate rsa private key
     openssl genrsa -out registry.docker.test.com.key 2048
@@ -209,7 +222,7 @@ docker:
     sudo mkdir -p /etc/docker/certs.d/registry.docker.test.com
     
     # Copy CRT into certs.d docker registry
-    sudo cp /home/$USER/certs/registry.docker.test.com.crt /etc/docker/certs.d/registry.docker.test.com/ca.crt
+    sudo cp /home/$USER/certs/registry.docker.test.com.crt /etc/docker/certs.d/registry.docker.test.com/ca.pem
     
     # as root -> Set registry on hosts
     echo "$(docker inspect -f '{{ (index .IPAM.Config 0).Gateway }}' bridge)    registry.docker.test.com" >> /etc/hosts
@@ -220,6 +233,7 @@ docker:
     -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.docker.test.com.crt \
     -e REGISTRY_HTTP_TLS_KEY=/certs/registry.docker.test.com.key \
     -v /opt/registry/data:/var/lib/registry \
+    --restart always \
     --name registry registry:2
     
     # Check registry
@@ -231,6 +245,8 @@ docker:
     # Push image to registry
     docker push registry.docker.test.com:5000/redis:alpine
     
+    # If face some problem look into know-issues []
+
 ---
 rhel:
   subscription:
