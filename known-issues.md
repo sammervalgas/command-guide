@@ -2,20 +2,63 @@ Known issues (Problems Solutions)
 =============
 
 
-#### Docker
+### Docker
 
-Issue:</br>
+Issue:<br/>
+
+```bash
 $ docker run -ti -p 8080:8080 -p 50000:50000 -v /opt/jenkins:/var/jenkins_home jenkins
-> touch: cannot touch ‘/var/jenkins_home/copy_reference_file.log’: Permission denied <br/>
-> Can not write to /var/jenkins_home/copy_reference_file.log. Wrong volume permissions?
+```
 
-Solution:
+> touch: cannot touch '/var/jenkins_home/copy_reference_file.log': Permission denied <br/>
+> Can not write to /var/jenkins_home/copy_reference_file.log. Wrong volume permissions?<br/><br/>
+
+### Solution:
+```bash
 $ sudo chmod -R 1000 /var/jenkins_home
 or
 $ sudo chmod -R 1000:1000 /var/jenkins_home
 
 $ docker run -it -u $(id -g) -p 8080:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+```
+<br/><br/>
+> ERROR: Get https://registry.docker.test.com/v2/: net/http: TLS handshake timeout in Docker
+> IMPORTANT: If you are inside proxy environment, setup http-proxy.conf daemon docker
 
+```bash
+cat /etc/systemd/system/docker.service.d/http-proxy.conf 
+    
+# If NOT EXIST run this line
+cat<<EOF >> /etc/systemd/system/docker.service.d/http-proxy.conf
+[Service]
+Environment="HTTP_PROXY=[YOUR_PROXY_URL]"
+Environment="NO_PROXY=localhost,127.0.0.1,registry.docker.test.com"
+
+# If EXISTS http-proxy.conf add NO_PROXY line
+echo 'Environment="NO_PROXY=localhost,127.0.0.1,registry.docker.test.com"' >> /etc/systemd/system/docker.service.d/http-proxy.conf
+```
+> x509: certificate signed by unknown authority<br/>
+> Add into daemon.json the follow snippet<br/>
+> docker-ce:  /etc/docker/daemon.json<br/>
+> redhat: /etc/sysconfig/docker<br/>
+
+```json
+{
+ "insecure-registries": ["registry.docker.test.com:5000"]
+}
+```
+
+_RELOAD_
+```bash
+# Reload daemon
+systemctl daemon-reload
+
+# Restart
+systemctl restart docker
+
+# Check the property Environment docker NO_PROXY shows.
+systemctl show --property Environment docker
+```
 
 #### Certbot
 Issue:</br>
