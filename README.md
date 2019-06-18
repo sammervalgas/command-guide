@@ -187,6 +187,13 @@ docker:
     docker build -t [IMAGE_TAGGED_NAME]:[IMAGE_VERSION] -f <Dockerfile> .
   run:
     docker run -d -i -t -v /folder:/container_folder -p 8080:80 [CONTAINER_NAME]
+  logs:
+    follow:
+      docker logs -f [CONTAINER_NAME]
+    last_lines:
+      docker logs -f --tail 10 [CONTAINER_NAME]
+    since:
+      docker logs -f --since 1m [CONTAINER_NAME]
   exec:
     docker exec -it [CONTAINER_NAME] bash # Enter inside container bash
     docker exec [CONTAINER_NAME] wget http://github.com/sammervalgas
