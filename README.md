@@ -42,10 +42,14 @@ find:
   find / -name [FILE|FOLDER]
   find / -iname [FILE|FOLDER] # case insensitive
   find . -name [FILE|FOLDER] -type d -exec rm -rf {} \; # Find and remove
-  find [FOLDER] -ilname [FILE|FOLDER] -print 2>/dev/null # Find without permission denied print
+  find [PATH] -ilname [FILE|FOLDER] -print 2>/dev/null # Find without permission denied print
   find . ! -name [FILE|FOLDER] # Find except file name
   # More infos: http://www.hypexr.org/linux_find_help.php
-
+  
+  Parent_Folder:
+    find [PATH] -type d -maxdepth 1
+    find [PATH] -type d -maxdepth 1 -ls
+    
 ---
 vim:
   copy_line: yy or Y
@@ -334,6 +338,8 @@ git:
 curl:
   download:
     curl -sSOL [HTTP_URL]
+  Post:
+    curl -X -H "Content-Type: application/json" -H "X-Auth-Token: jd108rs4hfield" --data "param1=value1" POST [MY_HTTP_POST]
 
 ---
 sed:
