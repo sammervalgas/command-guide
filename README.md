@@ -46,9 +46,11 @@ find:
   find . ! -name [FILE|FOLDER] # Find except file name
   # More infos: http://www.hypexr.org/linux_find_help.php
   
-  Parent_Folder:
+  parent_folder:
     find [PATH] -type d -maxdepth 1
     find [PATH] -type d -maxdepth 1 -ls
+  remove_directories_not_in_path:
+  find . -type d -not -path "*directory1" -not -path "*directory2" -maxdepth 1 -exec rm -rf '{}' \;
     
 ---
 vim:
