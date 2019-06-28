@@ -146,6 +146,7 @@ ssh:
 
 ---
 proxy:
+  # /etc/environment && ~/.bashrc
   add: export {http, https, ftp}_proxy="http://PROXY_SERVER:PORT"
   remove: unset {http, https, ftp}_proxy
   bash_function:
@@ -259,6 +260,23 @@ docker:
     docker push registry.docker.test.com:5000/redis:alpine
     
     # If face some problem look into know-issues []
+
+---
+npm:
+  config:
+    npm config --global [DATA]
+    npm config -g [DATA]
+    
+  proxy:
+    npm config -g set proxy "[PROXY_URL]"
+    npm config -g set https-proxy "[PROXY_URL]"
+    
+  ssl:
+    npm config -g set strict-ssl false
+    
+  registry:
+    npm config --global set registry "http://registry.npmjs.org/"
+  
 
 ---
 rhel:
