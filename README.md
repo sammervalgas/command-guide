@@ -298,6 +298,11 @@ git:
     git init
   remote:
     git remote add -f origin <remote_repository_url>
+  credential: 
+    # Store credential user pass after login one time.
+    git config --global credential.helper store
+    git config --global credential.helper cache #  memory
+    git config --global credential.helper 'cache timeout=36000'
   add:
     git add .
     git add -- [FILE|FOLDER]
