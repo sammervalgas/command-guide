@@ -56,7 +56,7 @@ find:
 vim:
   copy_line: yy or Y
   delete_line: dd
-  paste:
+  paste: 
     p # to paste the copied or deleted text after the current line
     P # to paste the copied or deleted text before the current line
   multiple_lines:
@@ -201,9 +201,16 @@ docker:
       docker logs -f --tail 10 [CONTAINER_NAME]
     since:
       docker logs -f --since 1m [CONTAINER_NAME]
+  filter:
+    # REF >>>>>> https://docs.docker.com/engine/reference/commandline/ps/
+    docker ps -a -f 'exited=0' # 1 137 ...
+    docker ps -a -f 'status=exited' # running | created | exited | paused | restarted
+    docker ps -a --filter 'status=running' --format 'table \n{{ .ID}} {{.Names}} --> {{.Ports}} {{.Size}}' 
+    
   exec:
     docker exec -it [CONTAINER_NAME] bash # Enter inside container bash
-    docker exec [CONTAINER_NAME] wget http://github.com/sammervalgas
+    docker exec -i [CONTAINER_NAME] wget http://github.com/sammervalgas # Run wget inside container
+    docker exec -i [CONTAINER_NAME] /bin/bash -c "mkdir -p ~/.m2/repository" # create folder inside docker
   inspect_images_in_use:
     docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=[CONTAINER_NAME] -q)
     docker inspect --format '{{ .NetworkSettings.IPAddress}}' [CONTAINER_NAME]
