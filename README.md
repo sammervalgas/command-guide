@@ -62,6 +62,9 @@ vim:
   multiple_lines:
     copy: 7yy
     delete: 10dd
+  replace_all:
+     :%s/search_string/replacement_string/g
+  
 
 ---
 virtualbox:
