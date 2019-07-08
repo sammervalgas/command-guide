@@ -8,7 +8,7 @@ Note: [known-issues](known-issues.md) like knowledge base problems. :)
 ### Typology
 
 | Reference  | Description  |
-|   :---:    |    :---:     |
+|   :-----:    |    :-----:     |
 |   [...]    |  To change   |   
 |   &#124;   |     Or       |
 
@@ -24,6 +24,14 @@ groups:
 ---
 check_os:
   cat /etc/*release | grep -i redhat|debian
+
+---
+  CPU:
+    Show:
+      lscpu
+      
+    Cores: 
+      lscpu | grep -E '^Thread|^Core|^Socket|^CPU\('
 
 ---
 cntlm:
