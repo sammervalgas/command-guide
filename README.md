@@ -21,7 +21,7 @@ Commands
 
 ###### User
 * `Groups` 
-* * create:
+ * create:
 
 ```yaml
 groups:
