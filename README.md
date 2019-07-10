@@ -5,7 +5,8 @@ Linux Command Guide
 
 Note: [known-issues](known-issues.md) like knowledge base problems. :)
 
-### Typology
+Typology
+--------
 
 | Reference  | Description  |
 |   :-----:    |    :-----:     |
@@ -15,8 +16,13 @@ Note: [known-issues](known-issues.md) like knowledge base problems. :)
 * `List commands below` - Important commands
 
 
-### Commands
----
+Commands
+--------
+
+###### User
+* ´groups´
+** create:
+
 ```yaml
 groups:
   create_group: groupadd [GROUPNAME]
