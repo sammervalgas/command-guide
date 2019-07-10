@@ -20,8 +20,8 @@ Commands
 --------
 
 ###### User
-* ´groups´
-** create:
+* `Groups` 
+* * create:
 
 ```yaml
 groups:
