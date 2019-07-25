@@ -486,3 +486,10 @@ tricks:
     for i in {$(history | tail -1 - | awk '{print $1}')..[END_POSITION]}; do history -d "$i"; done
 
 ```
+***kill***
+---
+```bash
+ kill -9 $(ps aux | grep -i 'ANY_PROCESS_PARAM_INSIDE_PSX' | awk '{print $2}' | head -n 1)
+ # kill agent.jar
+ kill -9 $(ps aux | grep 'java -jar agent.jar -jnlpUrl' | awk '{print $2}' | head -n 1)
+```
