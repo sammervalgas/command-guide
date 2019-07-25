@@ -19,6 +19,8 @@ Typology
 Commands
 --------
 
+- [kill](kill)
+
 ###### User
 * `Groups` 
   * create:
