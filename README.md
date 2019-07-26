@@ -19,8 +19,8 @@ Typology
 Commands
 --------
 
-- [kill](kill)
-- [privileges](#privileges)
+- [Kill](#kill)
+- [Privileges](#privileges)
 
 
 
