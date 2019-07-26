@@ -20,13 +20,9 @@ Commands
 --------
 
 - [kill](kill)
-
-###### User
-* `Groups` 
-  * create:
+- [privileges](#privileges)
 
 
-<font color='red'>test blue color font</font>
 
 
 ```yaml
@@ -495,3 +491,27 @@ tricks:
  # kill agent.jar
  kill -9 $(ps aux | grep 'java -jar agent.jar -jnlpUrl' | awk '{print $2}' | head -n 1)
 ```
+---
+
+##### Privileges ######
+---
+
+```bash
+# create user Ex: jenkins
+useradd jenkins
+
+# change password
+passwd jenkins
+
+# create sudoers user file inside sudoers.d! 
+# Ex: jenkins
+sudo /bin/bash -c "echo '' > /etc/sudoers.d/jenkins"
+
+# Add privileges without enter pass (not recomended but I like :)
+jenkins ALL= NOPASSWD: /usr/bin/docker # run docker
+jenkins ALL= NOPASSWD: /bin/vi /etc/hosts # edit hosts file
+
+# allow systemctl commands only for docker
+jenkins ALL= NOPASSWD: /bin/systemctl daemon-reload, /bin/systemctl status docker, /bin/systemctl start docker, /bin/systemctl stop docker, /bin/systemctl restart docker
+
+````
