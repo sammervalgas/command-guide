@@ -72,8 +72,17 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 ```
 
 #### AutoComplete ####
-```yaml
+```bash
+echo ' # mappings to have up and down arrow searching through history:
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+# mappings to have left and right arrow go left and right:
+"\e[C": forward-char
+"\e[D": backward-char
 
+# mapping to have [Tab] and [Shift]+[Tab] to cycle through all the possible completions:
+"\t": menu-complete
+"\e[Z": menu-complete-backward' >> ~/.inputrc
 ```
 
 #### CPU ####
@@ -94,134 +103,16 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 
 #### Hostname ####
 ```yaml
+  setting(Fedora):
+    hostnamectl -set-hostname [NAME]
+    hostnamectl status
+  add:
+    sudo /bin/bash -c 'echo -e "198.162.0.1\tmy.sample.host" >> /etc/hosts'
 
 ```
 
 #### Find ####
 ```yaml
-
-```
-
-#### Vim ####
-```yaml
-
-```
-
-#### Virtualbox ####
-```yaml
-
-```
-
-#### Disk ####
-```yaml
-
-```
-
-#### Systemctl ####
-```yaml
-
-```
-
-#### Remove ####
-```yaml
-
-```
-
-#### ssl ####
-```yaml
-
-```
-
-#### ssh ####
-```yaml
-
-```
-
-#### Proxy ####
-```yaml
-
-```
-
-#### Git ####
-```yaml
-
-```
-
-#### Docker ####
-```yaml
-
-```
-
-#### Curl ####
-```yaml
-
-```
-
-#### Sed ####
-```yaml
-
-```
-
-#### Tricks ####
-```yaml
-
-```
-
-#### date ####
-```yaml
-
-```
-
-#### pip ####
-```yaml
-
-```
-
-#### RHEL ####
-```yaml
-
-```
-
-#### NPM ####
-```yaml
-
-```
-
-#### Link ####
-```yaml
-
-```
-
-#### Kill ####
-```yaml
-
-```
-
-#### Privileges ####
-```yaml
-
-```
-
-
-
-```yaml
-
----
-  CPU:
-
-
----
-cntlm:
-
-
----
-hostname:
-  setting(Fedora):
-    hostnamectl -set-hostname [NAME]
-    hostnamectl status
-
----
-find:
   find / -name [FILE|FOLDER]
   find / -iname [FILE|FOLDER] # case insensitive
   find . -name [FILE|FOLDER] -type d -exec rm -rf {} \; # Find and remove
@@ -234,9 +125,10 @@ find:
     find [PATH] -type d -maxdepth 1 -ls
   remove_directories_not_in_path:
   find . -type d -not -path "*directory1" -not -path "*directory2" -maxdepth 1 -exec rm -rf '{}' \;
-    
----
-vim:
+```
+
+#### Vim ####
+```yaml
   copy_line: yy or Y
   delete_line: dd
   paste: 
@@ -247,15 +139,17 @@ vim:
     delete: 10dd
   replace_all:
      :%s/search_string/replacement_string/g
-  
+```
 
----
-virtualbox:
+#### Virtualbox ####
+```yaml
   guest_additions:
     sudo apt-get install virtualbox-guest-dkms virtualbox-guest-x11 linux-headers-$(uname -r)
     sudo reboot
----
-disk:
+```
+
+#### Disk ####
+```yaml
   increase:
     lsblk
     df -h
@@ -264,9 +158,10 @@ disk:
   spaces_used:
     cd /
     du -sch *
+```
 
-
-systemctl:
+#### Systemctl ####
+```yaml
   # Reload daemon
   systemctl daemon-reload
   
@@ -277,16 +172,21 @@ systemctl:
   systemctl restart [PROCESS]
   systemctl show --property [PROPERTY] [PROCESS]
   #systemctl show --property Environment docker
-  
----
-remove:
-  dir: rm -r [DIRECTORY] [*=ALL]
-  file: rm -f [FILE] [*=ALL]
+```
+
+#### Remove ####
+```yaml
+  dir: 
+    rm -r [DIRECTORY] [*=ALL]
+  file: 
+    rm -f [FILE] [*=ALL]
   per_day: 
     find [FOLDER] -mtime +1 -exec rm -f {} \;
     find . -mtime +180 -delete;
----
-ssl:
+```
+
+#### ssl ####
+```yaml
   crt:
     openssl genrsa 2048 > host.key
     chmod 400 host.key
@@ -315,8 +215,10 @@ ssl:
 
     #Generating a Self-Signed Certificate
     openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
----
-ssh:
+```
+
+#### ssh ####
+```yaml
   login_without_password:
     ssh-keygen -t rsa # Do not set password to a passphrase
     ssh <user>@<server_ip> mkdir -p ~/.ssh
@@ -329,9 +231,10 @@ ssh:
     eval $(ssh-agent -s)
     # add ssh key to the ssh-agent
     ssh-add ~/.ssh/id_rsa
+```
 
----
-proxy:
+#### Proxy ####
+```yaml
   # /etc/environment && ~/.bashrc
   add: export {http, https, ftp}_proxy="http://PROXY_SERVER:PORT"
   remove: unset {http, https, ftp}_proxy
@@ -346,26 +249,78 @@ proxy:
           unset {http,https,ftp}_proxy
       }" >> ~/.bashrc && source ~/.bashrc
 
----
-auto_complete:
-echo ' # mappings to have up and down arrow searching through history:
-"\e[A": history-search-backward
-"\e[B": history-search-forward
-# mappings to have left and right arrow go left and right:
-"\e[C": forward-char
-"\e[D": backward-char
+```
 
-# mapping to have [Tab] and [Shift]+[Tab] to cycle through all the possible completions:
-"\t": menu-complete
-"\e[Z": menu-complete-backward' >> ~/.inputrc
+#### Git ####
+```yaml
+  init:
+    git init
+  remote:
+    git remote add -f origin <remote_repository_url>
+  credential: 
+    # Store credential user pass after login one time.
+    git config --global credential.helper store
+    git config --global credential.helper cache #  memory
+    git config --global credential.helper 'cache timeout=36000'
+  add:
+    git add .
+    git add -- [FILE|FOLDER]
+  commit:
+    git commit -m "First commit"
+    git commit -m -a "Commit with add"
+    last_commit:
+      git show --name-only
+      git log --name-status HEAD^..HEAD
+      git diff-tree --no-commit-id --name-only -r HEAD^..HEAD
+  checkout:
+    switch: git checkout [BRANCH]
+    branch: git checkout -b [BRANCH_NAME] [SHA1 | OLDEST_VERSION]
+  remove:
+    git rm [FILE|FOLDER]
+  push:
+    git push -u origin master
+  stash:
+    git stash
+    git stash apply
+    git stash pop
+  clone:
+    git clone [REPO_URL] [FOLDER]
+    oldest:
+      git clone [REPO_URL]
+      git log --all
+      git checkout <SHA1>
+  config:
+    # edit
+    git config [ --global | --system ] -e
+    # --global = ~/.gitconfig
+    # --system = /etc/gitconfig
+    git config [ --global | --system ] alias.st status # git st
+    git config [ --global | --system ] http.proxy http://[USERNAME]:[PASSWORD]@[PROXY_URL]:[PROXY_PORT]
+    git config [ --global | --system ] http.sslVerify [true | false]
+    git config [ --global | --system ] --get http.proxy  
+    git config [ --global | --system ] --unset http.proxy  
+  revert:
+    git checkout -- [FILE|FOLDER|COMMIT_ID] HEAD~[number]
+  reset:
+    git reset -- [FILE|FOLDER]
+    git reset .
+  remove:
+    git rm -- [FILE|FOLDER]
+  log:
+    git log -- [FILE|FOLDER]
+    git log -p -2 --all --full-history -- *[FILE|FOLDER]*
+    git log after='2017-01-01' before='2018-01-01'
 
----
-link:
-  ln -s [SOURCE] [DESTINATION]
-  unlink [FILE|FOLDER]
+    git log --stat
+    git log --pretty=oneline | short | medium | full | fuller
 
----
-docker:
+  recovery_detached:
+    $ git reflog
+    $ git checkout -b [BRANCH_NAME] [ID|HEAD~<NUMBER>]
+```
+
+#### Docker ####
+```yaml
   list-containers[all]:
     docker ps [-a]
   list-images:
@@ -453,114 +408,19 @@ docker:
     docker push registry.docker.test.com:5000/redis:alpine
     
     # If face some problem look into know-issues []
+```
 
----
-npm:
-  config:
-    npm config --global [DATA]
-    npm config -g [DATA]
-    
-  proxy:
-    npm config -g set proxy "[PROXY_URL]"
-    npm config -g set https-proxy "[PROXY_URL]"
-    
-  ssl:
-    npm config -g set strict-ssl false
-    
-  registry:
-    npm config --global set registry "http://registry.npmjs.org/"
-  
-
----
-rhel:
-  subscription:
-    check: sudo subscription-manager status
-    #where: https://access.redhat.com/downloads/content/package-browser
-    repo_enable: subscription-manager repos --enable=[REPO] #Ex: -> rhel-7-server-optional-rpms
-
----
-pip:
-  installation:
-    pip install --upgrade pip
-    pip install docker-compose==1.9.0
-  search_list:
-    pip list --format=columns | grep docker
----
-git:
-  init:
-    git init
-  remote:
-    git remote add -f origin <remote_repository_url>
-  credential: 
-    # Store credential user pass after login one time.
-    git config --global credential.helper store
-    git config --global credential.helper cache #  memory
-    git config --global credential.helper 'cache timeout=36000'
-  add:
-    git add .
-    git add -- [FILE|FOLDER]
-  commit:
-    git commit -m "First commit"
-    git commit -m -a "Commit with add"
-    last_commit:
-      git show --name-only
-      git log --name-status HEAD^..HEAD
-      git diff-tree --no-commit-id --name-only -r HEAD^..HEAD
-  checkout:
-    switch: git checkout [BRANCH]
-    branch: git checkout -b [BRANCH_NAME] [SHA1 | OLDEST_VERSION]
-  remove:
-    git rm [FILE|FOLDER]
-  push:
-    git push -u origin master
-  stash:
-    git stash
-    git stash apply
-    git stash pop
-  clone:
-    git clone [REPO_URL] [FOLDER]
-    oldest:
-      git clone [REPO_URL]
-      git log --all
-      git checkout <SHA1>
-  config:
-    # edit
-    git config [ --global | --system ] -e
-    # --global = ~/.gitconfig
-    # --system = /etc/gitconfig
-    git config [ --global | --system ] alias.st status # git st
-    git config [ --global | --system ] http.proxy http://[USERNAME]:[PASSWORD]@[PROXY_URL]:[PROXY_PORT]
-    git config [ --global | --system ] http.sslVerify [true | false]
-    git config [ --global | --system ] --get http.proxy  
-    git config [ --global | --system ] --unset http.proxy  
-  revert:
-    git checkout -- [FILE|FOLDER|COMMIT_ID] HEAD~[number]
-  reset:
-    git reset -- [FILE|FOLDER]
-    git reset .
-  remove:
-    git rm -- [FILE|FOLDER]
-  log:
-    git log -- [FILE|FOLDER]
-    git log -p -2 --all --full-history -- *[FILE|FOLDER]*
-    git log after='2017-01-01' before='2018-01-01'
-
-    git log --stat
-    git log --pretty=oneline | short | medium | full | fuller
-
-  recovery_detached:
-    $ git reflog
-    $ git checkout -b [BRANCH_NAME] [ID|HEAD~<NUMBER>]
-
----
-curl:
+#### Curl ####
+```yaml
   download:
     curl -sSOL [HTTP_URL]
   Post:
     curl -X -H "Content-Type: application/json" -H "X-Auth-Token: jd108rs4hfield" --data "param1=value1" POST [MY_HTTP_POST]
 
----
-sed:
+```
+
+#### Sed ####
+```yaml
   # Creating a file to use sed
   cat <<EOF >> sample-for-sed
   001 history
@@ -580,9 +440,10 @@ g = global
 's/old_text/new_text/g' = Remove all old_text to new_text
 'sed '0,/pattern/s/pattern/replacement/' filename' = Change first line ocurrency only.
 
-''
----
-date:
+```
+
+#### date ####
+```yaml
  timestamp:
   $ date +%s
  weekday uppercase:
@@ -640,14 +501,49 @@ date:
       %::z  +hh:mm:ss numeric time zone (e.g., -04:00:00)
       %:::z  numeric time zone with : to necessary precision (e.g., -04, +05:30)
       %Z   alphabetic time zone abbreviation (e.g., EDT)
-      
-----
-tricks:
-  hide_traces:
-    history -d $(history | tail -1 - | awk '{print $1}') | vi ~/.bash_history
-    for i in {$(history | tail -1 - | awk '{print $1}')..[END_POSITION]}; do history -d "$i"; done
+```
+
+#### pip ####
+```yaml
+  installation:
+    pip install --upgrade pip
+    pip install docker-compose==1.9.0
+  search_list:
+    pip list --format=columns | grep docker
+```
+
+#### RHEL ####
+```yaml
+  subscription:
+    check: sudo subscription-manager status
+    #where: https://access.redhat.com/downloads/content/package-browser
+    repo_enable: subscription-manager repos --enable=[REPO] #Ex: -> rhel-7-server-optional-rpms
 
 ```
+
+#### NPM ####
+```yaml
+  config:
+    npm config --global [DATA]
+    npm config -g [DATA]
+    
+  proxy:
+    npm config -g set proxy "[PROXY_URL]"
+    npm config -g set https-proxy "[PROXY_URL]"
+    
+  ssl:
+    npm config -g set strict-ssl false
+    
+  registry:
+    npm config --global set registry "http://registry.npmjs.org/"
+```
+
+#### Link ####
+```yaml
+  ln -s [SOURCE] [DESTINATION]
+  unlink [FILE|FOLDER]
+```
+
 #### Kill #####
 ---
 ```bash
@@ -678,3 +574,12 @@ jenkins ALL= NOPASSWD: /bin/vi /etc/hosts # edit hosts file
 jenkins ALL= NOPASSWD: /bin/systemctl daemon-reload, /bin/systemctl status docker, /bin/systemctl start docker, /bin/systemctl stop docker, /bin/systemctl restart docker
 
 ````
+<!--
+#### Tricks ####
+```yaml
+  hide_traces:
+    history -d $(history | tail -1 - | awk '{print $1}') | vi ~/.bash_history
+    for i in {$(history | tail -1 - | awk '{print $1}')..[END_POSITION]}; do history -d "$i"; done
+
+```
+-->
