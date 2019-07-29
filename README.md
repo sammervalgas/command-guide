@@ -18,7 +18,24 @@ Typology
 
 Commands
 --------
+A bunch of command lines designed to help us day by day, bellow are the summary of commands.
 
+- [User](#user)
+- [Groups](#groups)
+- [CheckOS](#checkos)
+- [CPU](#cpu)
+- [](#cntlm)
+- [](#hostname)
+- [](#find)
+- [](#vim)
+- [](#virtualbox)
+- [](#disk)
+- [](#systemctl)
+- [](#remove)
+- [](#ssl)
+- [](#ssh)
+- [](#proxy)
+- [](#)
 - [Kill](#kill)
 - [Privileges](#privileges)
 
