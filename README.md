@@ -23,49 +23,196 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [User](#user)
 - [Groups](#groups)
 - [CheckOS](#checkos)
+- [AutoComplete](#auto_complete)
 - [CPU](#cpu)
-- [](#cntlm)
-- [](#hostname)
-- [](#find)
-- [](#vim)
-- [](#virtualbox)
-- [](#disk)
-- [](#systemctl)
-- [](#remove)
-- [](#ssl)
-- [](#ssh)
-- [](#proxy)
-- [](#)
+- [cntlm](#cntlm)
+- [hostname](#hostname)
+- [find](#find)
+- [vim](#vim)
+- [virtualbox](#virtualbox)
+- [disk](#disk)
+- [systemctl](#systemctl)
+- [remove](#remove)
+- [ssl](#ssl)
+- [ssh](#ssh)
+- [proxy](#proxy)
+- [git](#git)
+- [docker](#docker)
+- [curl](#curl)
+- [sed](#sed)
+- [tricks](#tricks)
+- [date](#date)
+- [pip](#pip)
+- [rhel](#rhel)
+- [npm](#npm)
+- [link](#link)
 - [Kill](#kill)
 - [Privileges](#privileges)
 
 
-
-
+#### User ####
 ```yaml
-groups:
+  create: useradd [USERNAME]
+  update_pass: passwd [USERNAME]
+  list_user: cat /etc/sudoers
+  
+```
+
+#### Groups ####
+```yaml
   create_group: groupadd [GROUPNAME]
   add_group: usermod -aG [GROUPNAME] [USERNAME]
   entire_group_list: cut -d: -f1 /etc/group | sort
   specific_user: id -Gn [USERNAME]
+```
 
----
-check_os:
+#### CheckOS ####
+```yaml
   cat /etc/*release | grep -i redhat|debian
+```
 
----
-  CPU:
-    Show:
-      lscpu
-      
-    Cores: 
-      lscpu | grep -E '^Thread|^Core|^Socket|^CPU\('
+#### AutoComplete ####
+```yaml
 
----
-cntlm:
+```
+
+#### CPU ####
+```yaml
+  Show:
+    lscpu
+
+  Cores: 
+    lscpu | grep -E '^Thread|^Core|^Socket|^CPU\('
+```
+
+#### Cntlm ####
+```yaml
   # https://vijiboy.wordpress.com/2018/03/14/configure-cntlm-to-generate-hash-for-your-password-h-and-verify-m/
   user_data: cntlm -H -u username -d domainname # /etc/cntlm.conf
   check: cntlm -M http://google.com
+```
+
+#### Hostname ####
+```yaml
+
+```
+
+#### Find ####
+```yaml
+
+```
+
+#### Vim ####
+```yaml
+
+```
+
+#### Virtualbox ####
+```yaml
+
+```
+
+#### Disk ####
+```yaml
+
+```
+
+#### Systemctl ####
+```yaml
+
+```
+
+#### Remove ####
+```yaml
+
+```
+
+#### ssl ####
+```yaml
+
+```
+
+#### ssh ####
+```yaml
+
+```
+
+#### Proxy ####
+```yaml
+
+```
+
+#### Git ####
+```yaml
+
+```
+
+#### Docker ####
+```yaml
+
+```
+
+#### Curl ####
+```yaml
+
+```
+
+#### Sed ####
+```yaml
+
+```
+
+#### Tricks ####
+```yaml
+
+```
+
+#### date ####
+```yaml
+
+```
+
+#### pip ####
+```yaml
+
+```
+
+#### RHEL ####
+```yaml
+
+```
+
+#### NPM ####
+```yaml
+
+```
+
+#### Link ####
+```yaml
+
+```
+
+#### Kill ####
+```yaml
+
+```
+
+#### Privileges ####
+```yaml
+
+```
+
+
+
+```yaml
+
+---
+  CPU:
+
+
+---
+cntlm:
+
 
 ---
 hostname:
