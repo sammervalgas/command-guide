@@ -48,6 +48,7 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [link](#link)
 - [Kill](#kill)
 - [Privileges](#privileges)
+- [Openshift](#openshift)
 
 
 #### User ####
@@ -545,7 +546,6 @@ g = global
 ```
 
 #### Kill #####
----
 ```bash
  kill -9 $(ps aux | grep -i 'ANY_PROCESS_PARAM_INSIDE_PSX' | awk '{print $2}' | head -n 1)
  # kill agent.jar
@@ -553,8 +553,6 @@ g = global
 ```
 
 #### Privileges #####
----
-
 ```bash
 # create user Ex: jenkins
 useradd jenkins
@@ -573,7 +571,21 @@ jenkins ALL= NOPASSWD: /bin/vi /etc/hosts # edit hosts file
 # allow systemctl commands only for docker
 jenkins ALL= NOPASSWD: /bin/systemctl daemon-reload, /bin/systemctl status docker, /bin/systemctl start docker, /bin/systemctl stop docker, /bin/systemctl restart docker
 
-````
+```
+
+#### Openshift ####
+
+*** OC ***
+
+```bash
+oc get dc [deployment-config]
+oc get svc [service]
+oc get bc [buildConfig]
+
+```
+
+
+
 <!--
 #### Tricks ####
 ```yaml
