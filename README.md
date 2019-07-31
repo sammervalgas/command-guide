@@ -100,6 +100,13 @@ echo ' # mappings to have up and down arrow searching through history:
   # https://vijiboy.wordpress.com/2018/03/14/configure-cntlm-to-generate-hash-for-your-password-h-and-verify-m/
   user_data: cntlm -H -u username -d domainname # /etc/cntlm.conf
   check: cntlm -M http://google.com
+
+```
+#### Host ####
+
+```yaml
+ get_address:
+    host localhost
 ```
 
 #### Hostname ####
@@ -111,6 +118,17 @@ echo ' # mappings to have up and down arrow searching through history:
     sudo /bin/bash -c 'echo -e "198.162.0.1\tmy.sample.host" >> /etc/hosts'
 
 ```
+
+#### Grep ####
+
+```yaml
+ regex:
+    grep -Po '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' <<<'Find my server ip 127.0.0.1 or my.local.host'
+    grep -Po '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' <<<$(cat cat /etc/hosts)
+    cat /etc/hosts | grep -Po '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
+   
+```
+
 
 #### Find ####
 ```yaml
