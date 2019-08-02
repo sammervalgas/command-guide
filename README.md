@@ -148,6 +148,7 @@ echo ' # mappings to have up and down arrow searching through history:
 
 #### Vim ####
 ```yaml
+  select: vyp [highlight/copy/paste]
   copy_line: yy or Y
   delete_line: dd
   paste: 
