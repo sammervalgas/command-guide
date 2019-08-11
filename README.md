@@ -442,7 +442,7 @@ echo ' # mappings to have up and down arrow searching through history:
 #### Sed ####
 ```yaml
   # Creating a file to use sed
-  cat <<EOF >> sample-for-sed
+  cat <<EOF >> sample-for-sed.file
   001 history
   002 blob
   003 old_text
@@ -459,6 +459,9 @@ g = global
 's/\s[0-9]*//g' = Remove all numbers
 's/old_text/new_text/g' = Remove all old_text to new_text
 'sed '0,/pattern/s/pattern/replacement/' filename' = Change first line ocurrency only.
+
+add-text-one-line:
+  sed -e '/002/s/append_me/' sample-for-sed.file
 
 ```
 
