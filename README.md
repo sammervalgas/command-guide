@@ -48,6 +48,7 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [link](#link)
 - [Kill](#kill)
 - [Privileges](#privileges)
+- [Bootable_USB](#bootable_usb)
 - [Openshift](#openshift)
 
 
@@ -595,6 +596,32 @@ jenkins ALL= NOPASSWD: /bin/systemctl daemon-reload, /bin/systemctl status docke
 
 ```
 
+#### Bootable_usb ####
+
+> :warning: ***IMPORTANT:***    
+> Make sure to specify the output as the device name (for example, /dev/sdb), not as a name of a partition on the device (for example, /dev/sdb1).
+
+```bash
+$ lsblk
+.
+.
+.
+sdb               8:16   1  14,4G  0 disk 
+└─sdb1            8:17   1  14,4G  0 part /run/media/sammervalgas/pendrive
+
+#####
+
+$ su -
+$ umount /dev/sdb
+
+$ dd if=/home/sammervalgas/isos/my.iso of=/dev/sdb bs=1M
+1994+1 registros de entrada
+1994+1 registros de saída
+2091008000 bytes (2,1 GB) copiados, 135,882 s, 15,4 MB/s
+
+```
+
+
 #### Openshift ####
 
 *** OC ***
@@ -605,7 +632,6 @@ oc get svc [service]
 oc get bc [buildConfig]
 
 ```
-
 
 
 <!--
