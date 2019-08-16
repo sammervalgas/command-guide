@@ -336,8 +336,15 @@ echo ' # mappings to have up and down arrow searching through history:
     git log --pretty=oneline | short | medium | full | fuller
 
   recovery_detached:
-    $ git reflog
-    $ git checkout -b [BRANCH_NAME] [ID|HEAD~<NUMBER>]
+    git reflog
+    git checkout -b [BRANCH_NAME] [ID|HEAD~<NUMBER>]
+  rename_local_branch:
+    git branch -m NEW_BRANCH_NAME
+
+  rename_remote_branch
+    git branch -m NEW_BRANCH_NAME
+    git push origin --delete NEW_BRANCH_NAME
+    git push -u origin NEW_BRANCH_NAME
 ```
 
 #### Docker ####
@@ -545,7 +552,7 @@ add-text-one-line:
 
 ```
 
-#### NPM ####
+#### npm ####
 ```yaml
   config:
     npm config --global [DATA]
@@ -558,8 +565,15 @@ add-text-one-line:
   ssl:
     npm config -g set strict-ssl false
     
-  registry:
+  config:
     npm config --global set registry "http://registry.npmjs.org/"
+    # remove
+    npm config --global unset registry
+  
+  proxy:
+    npm config set proxy http://<username>:<password>@<proxy-server-url>:<port>
+    npm config set https-proxy http://<username>:<password>@<proxy-server-url>:<port>
+  
 ```
 
 #### Link ####
@@ -626,10 +640,35 @@ $ dd if=/home/sammervalgas/isos/my.iso of=/dev/sdb bs=1M
 
 *** OC ***
 
-```bash
+```yaml
 oc get dc [deployment-config]
 oc get svc [service]
 oc get bc [buildConfig]
+
+Create: 
+  NewApp:
+	  oc new-app app1
+Edit:
+	oc edit ... -n [NAMESPACE]
+
+Template:
+	oc get template [TEMPLATE_NAME]
+	oc get template [TEMPLATE_NAME] -o yaml
+	oc edit template [TEMPLATE_NAME]
+
+Pods:
+	oc get pods
+  oc get pod [NAME] -o wide
+  oc describe pod [NAME]
+  oc delete pod [NAME]
+  
+Nodes:
+	oc get nodes 
+	oc get nodes -o wide
+	oc get nodes -o yaml | json
+
+Formatted:
+	oc get pods -n [NAMESPACE] -o wide | awk '{printf "%s \t\t %s \n", $1, $7}'
 
 ```
 
