@@ -179,6 +179,9 @@ echo ' # mappings to have up and down arrow searching through history:
   spaces_used:
     cd /
     du -sch *
+    du -h --max-depth=1 ./
+  list_disk_usage:
+    df -h
 ```
 
 #### Systemctl ####
