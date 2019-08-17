@@ -22,6 +22,7 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 
 - [User](#user)
 - [Groups](#groups)
+- [Alias](#alias)
 - [CheckOS](#checkos)
 - [AutoComplete](#auto_complete)
 - [CPU](#cpu)
@@ -67,6 +68,18 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
   entire_group_list: cut -d: -f1 /etc/group | sort
   specific_user: id -Gn [USERNAME]
 ```
+
+#### Alias ####
+Create your custom shortcuts
+
+```bash
+
+cat <<EOF >> ~/.bash_aliases
+### GIT ###
+
+
+```
+
 
 #### CheckOS ####
 ```yaml
@@ -348,6 +361,9 @@ echo ' # mappings to have up and down arrow searching through history:
     git branch -m NEW_BRANCH_NAME
     git push origin --delete NEW_BRANCH_NAME
     git push -u origin NEW_BRANCH_NAME
+  git_clone_one_file:
+    
+
 ```
 
 #### Docker ####
@@ -655,15 +671,21 @@ Edit:
 	oc edit ... -n [NAMESPACE]
 
 Template:
-	oc get template [TEMPLATE_NAME]
-	oc get template [TEMPLATE_NAME] -o yaml
-	oc edit template [TEMPLATE_NAME]
+   get:
+     oc get template [TEMPLATE_NAME]
+     oc get template [TEMPLATE_NAME] -o yaml
+   edit:
+     oc edit template [TEMPLATE_NAME]
+  create_from_git:
+    git archive --remote=GIT_REPO.git HEAD template.yml | oc create -f -
+  replace_from_git:
+    git archive --remote=GIT_REPO.git HEAD template.yml | oc replace -f -
 
 Pods:
 	oc get pods
-  oc get pod [NAME] -o wide
-  oc describe pod [NAME]
-  oc delete pod [NAME]
+  	oc get pod [NAME] -o wide
+  	oc describe pod [NAME]
+  	oc delete pod [NAME]
   
 Nodes:
 	oc get nodes 
