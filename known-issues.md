@@ -2,9 +2,9 @@ Known issues (Problems Solutions)
 =============
 
 
-## Docker
+## Docker ##
 
-### Issue:<br/>
+#### :red_circle: ERROR ####
 
 ```bash
 $ docker run -ti -p 8080:8080 -p 50000:50000 -v /opt/jenkins:/var/jenkins_home jenkins
@@ -13,7 +13,7 @@ $ docker run -ti -p 8080:8080 -p 50000:50000 -v /opt/jenkins:/var/jenkins_home j
 > touch: cannot touch '/var/jenkins_home/copy_reference_file.log': Permission denied <br/>
 > Can not write to /var/jenkins_home/copy_reference_file.log. Wrong volume permissions?<br/><br/>
 
-### Solution:
+#### :heavy_check_mark: SOLUTION ####
 ```bash
 $ sudo chmod -R 1000 /var/jenkins_home
 or
@@ -23,13 +23,14 @@ $ docker run -it -u $(id -g) -p 8080:8080 -p 50000:50000 -v /var/jenkins_home:/v
 ```
 <br/><br/>
 
-### Issue 
+#### :red_circle: ERROR ####
 
 > ERROR: Get https://registry.docker.test.com/v2/: net/http: TLS handshake timeout in Docker <br/>
 > IMPORTANT: If you are inside proxy environment, setup http-proxy.conf daemon docker
 <br/>
 
-### Solution
+#### :heavy_check_mark: SOLUTION ####
+
 ```bash
 cat /etc/systemd/system/docker.service.d/http-proxy.conf 
     
@@ -52,14 +53,14 @@ systemctl restart docker
 systemctl show --property Environment docker
 ```
 <br/><br/>
-### Problem
+#### :red_circle: ERROR ####
 > x509: certificate signed by unknown authority<br/>
 > Add into daemon.json the follow snippet<br/>
 > docker-ce:  /etc/docker/daemon.json<br/>
 > redhat: /etc/sysconfig/docker<br/>
 <br/>
 
-### Solution
+#### :heavy_check_mark: SOLUTION ####
 
 ```json
 {
@@ -76,13 +77,15 @@ systemctl restart docker
 systemctl show --property Environment docker
 ```
 
-#### Certbot
-## Issue:</br>
+
+## Certbot ##
+#### :red_circle: ISSUE ####
 
 > Problems with renew...
 > Client with the currently selected authenticator does not support any combination of challenges that will satisfy the CA
 <br/>
-### Solution:
+
+#### :heavy_check_mark: SOLUTION ####
 ```bash
 sudo certbot --authenticator standalone --installer nginx -d [MY.DOMAIN] --pre-hook "service nginx stop" --post-hook "service nginx start"
 ```
@@ -92,7 +95,7 @@ sudo certbot --authenticator standalone --installer nginx -d [MY.DOMAIN] --pre-h
 
 ## DOCKER SONARQUBE ##
 
-#### :red_circle: ISSUE ####
+#### :red_circle: ERROR ####
     
     max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 
