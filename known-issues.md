@@ -90,10 +90,14 @@ sudo certbot --authenticator standalone --installer nginx -d [MY.DOMAIN] --pre-h
 > (OR) Follow this link: https://community.letsencrypt.org/t/how-to-stop-using-tls-sni-01-with-certbot/83210
 
 
-#### DOCKER SONARQUBE ####
+## DOCKER SONARQUBE ##
 
->  max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+#### :red_circle: ISSUE ####
+    
+    max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 
-Solution
-> sudo sysctl -w vm.max_map_count=262144
+#### :heavy_check_mark: SOLUTION ####
 
+```bash
+sudo sysctl -w vm.max_map_count=262144
+```
