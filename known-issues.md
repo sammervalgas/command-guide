@@ -25,9 +25,9 @@ $ docker run -it -u $(id -g) -p 8080:8080 -p 50000:50000 -v /var/jenkins_home:/v
 
 #### :red_circle: ERROR ####
 
-> ERROR: Get https://registry.docker.test.com/v2/: net/http: TLS handshake timeout in Docker <br/>
-> IMPORTANT: If you are inside proxy environment, setup http-proxy.conf daemon docker
-<br/>
+***_Get https://registry.docker.test.com/v2/: net/http: TLS handshake timeout in Docker_***
+
+> :warning:IMPORTANT: If you are behind proxy environment, setup http-proxy.conf daemon docker
 
 #### :heavy_check_mark: SOLUTION ####
 
@@ -52,13 +52,14 @@ systemctl restart docker
 # Check the property Environment docker NO_PROXY shows.
 systemctl show --property Environment docker
 ```
-<br/><br/>
+---
 #### :red_circle: ERROR ####
-> x509: certificate signed by unknown authority<br/>
-> Add into daemon.json the follow snippet<br/>
-> docker-ce:  /etc/docker/daemon.json<br/>
-> redhat: /etc/sysconfig/docker<br/>
-<br/>
+***_x509: certificate signed by unknown authority_***
+
+
+Add into daemon.json the follow snippet according docker installation type: <br/>
+* docker-ce: /etc/docker/daemon.json <br/>
+* redhat: /etc/sysconfig/docker <br/>
 
 #### :heavy_check_mark: SOLUTION ####
 
@@ -76,14 +77,11 @@ systemctl restart docker
 # Check the property Environment docker NO_PROXY shows.
 systemctl show --property Environment docker
 ```
-
-
+---
 ## Certbot ##
-#### :red_circle: ISSUE ####
-
-> Problems with renew...
-> Client with the currently selected authenticator does not support any combination of challenges that will satisfy the CA
-<br/>
+#### :red_circle: ERROR ####
+***_Problems with renew...<br/>
+Client with the currently selected authenticator does not support any combination of challenges that will satisfy the CA_***
 
 #### :heavy_check_mark: SOLUTION ####
 ```bash
