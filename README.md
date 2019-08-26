@@ -326,6 +326,8 @@ echo ' # mappings to have up and down arrow searching through history:
       git clone [REPO_URL]
       git log --all
       git checkout <SHA1>
+    specific_branch:
+      git clone --single-branch --branch BRANCH_NAME GIT_REPO_URL [REPO_NAME] 
   config:
     # edit
     git config [ --global | --system ] -e
