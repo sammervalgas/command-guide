@@ -3,7 +3,8 @@
 Linux Command Guide
 =============
 
-Note: [known-issues](known-issues.md) like knowledge base problems. :)
+NOTE: [known-issues](known-issues.md) like knowledge base problems. :)
+NOTE: [Openshift-CLI](openshift-cli.md) bunch of cli openshift :)
 
 Typology
 --------
