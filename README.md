@@ -364,7 +364,12 @@ echo ' # mappings to have up and down arrow searching through history:
     git push origin --delete NEW_BRANCH_NAME
     git push -u origin NEW_BRANCH_NAME
   git_clone_one_file:
-    
+  
+  get_commit_message:
+     # .git/hook/commit-msg
+     #!/bin/bash
+     	INPUT_FILE=$1
+	START_LINE=`head -n1 $INPUT_FILE`
 
 ```
 
