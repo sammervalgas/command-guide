@@ -58,9 +58,11 @@ Username: test
 Password: test
 
 $ oc login -u test -p test
+
+$ oc login --token Rlcy52....
 ```
 
-See also [`oc logout`](#oc-logout) and [`oc whoami`](#oc-whoami).
+See also [`oc get token`](#oc-get-token), [`oc logout`](#oc-logout) and [`oc whoami`](#oc-whoami).
 
 ### oc new-project
 
@@ -691,3 +693,47 @@ Flag `-c` (or `--show-context`) means to instead display the user context name.
 $ oc whoami -t
 <token>
 ```
+### oc get token
+This shown how to get token of service account user
+```bash
+$ oc get sa [-n default | --all-namespaces | grep MY_SA_USER] 
+NAME             SECRETS   AGE
+builder          2         5d
+default          3         5d
+deployer         2         5d
+MY_SA_USER       2         2d
+
+$ oc describe sa MY_SA_USER
+Name:                MY_SA_USER
+Namespace:           default
+Labels:              <none>
+Annotations:         <none>
+Image pull secrets:  MY_SA_USER-dockercfg-5gbdk
+Mountable secrets:   MY_SA_USER-token-912n
+                     MY_SA_USER-dockercfg-pppt
+Tokens:              MY_SA_USER-token-s910a
+                     MY_SA_USERr-token-kibq
+Events:              <none>
+
+$ oc describe secret MY_SA_USER-token-s910a 
+Name:         MY_SA_USER
+Namespace:    default
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name=MY_SA_USER
+              kubernetes.io/service-account.uid=ea26112ae-9f8b-9bd7-9012-00502736b6
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+service-ca.crt:  2186 bytes
+token:           SYfLq5OJtdok4NQLcafSQuVGKMzSfq3BuAAVuSrtEdul4mtpbnMuZG990d1n3ec9req78hf4ewjfmcqRGQ#grvi8nwevf9v8jqwrvwFCV}S
+ic3lzdGVtOnNlcnZpY2VhY2NvdW50OmRlZmF1bHQ6amVua2lucy5kb2NrZXIiDOAOsjd982h3bfvevowe]gopvqgbvwebvlEWnB9wXy9MWk6Is8HpvnBSgfTaA0jzAymmb75zpEiwKsB-qJ493o50xThs8vDZy47Q
+ca.crt:          1070 bytes
+namespace:       7 bytes
+
+#### TRICK INLINE ####
+$ SERVICE_ACCOUNT_USER='CHANGE_ME' && oc describe secret $(oc describe sa $(oc get sa | grep -i "$SERVICE_ACCOUNT_USER" | awk '{print $1}') | grep -i tokens | rev | cut -d ':' -f1 | rev) | grep -i 'token:' | awk '{print $2}'
+
+```
+
