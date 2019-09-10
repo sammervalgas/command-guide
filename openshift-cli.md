@@ -735,5 +735,8 @@ namespace:       7 bytes
 #### TRICK INLINE ####
 $ SERVICE_ACCOUNT_USER='CHANGE_ME' && oc describe secret $(oc describe sa $(oc get sa | grep -i "$SERVICE_ACCOUNT_USER" | awk '{print $1}') | grep -i tokens | rev | cut -d ':' -f1 | rev) | grep -i 'token:' | awk '{print $2}'
 
+OR 
+# USING TEMPLATE
+$ oc get sa MY_SA_USER -n default -o template --template="{{with index .secrets 0}}{{.name}}{{end}}"
 ```
 
