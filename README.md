@@ -4,8 +4,10 @@ Linux Command Guide
 =============
 
 > NOTE: ***[known-issues](known-issues.md)*** like knowledge base problems. :)
+
 <br/>
-> NOTE: ***[Openshift-CLI](openshift-cli.md)*** bunch of cli openshift :)
+
+> NOTE: ***[openshift-cli](openshift-cli.md)*** bunch of cli openshift :)
 
 Typology
 --------
