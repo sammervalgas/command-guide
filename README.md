@@ -28,7 +28,7 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [Groups](#groups)
 - [Alias](#alias)
 - [CheckOS](#checkos)
-- [AutoComplete](#auto_complete)
+- [AutoComplete](#AutoComplete)
 - [CPU](#cpu)
 - [cntlm](#cntlm)
 - [hostname](#hostname)
@@ -425,6 +425,9 @@ echo ' # mappings to have up and down arrow searching through history:
     docker cp [CONTAINER_NAME]:[FILE|FOLDER] [DESTINATION]
   copy-to-container:
     docker cp [DESTINATION] [CONTAINER_NAME]:[FILE|FOLDER]
+  enter_specific_container_folder:
+  	docker exec -it CONTAINER_NAME bash -c 'cd /some/dir; exec bash'
+	docker exec -it CONTAINER_NAME bash -c 'cd /some/dir; exec ${SHELL:-sh}' # Not usual but works.
   registry:
     mkdir -p /home/$USER/certs
     cd /home/$USER/certs
