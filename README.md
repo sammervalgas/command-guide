@@ -55,6 +55,7 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [Privileges](#privileges)
 - [Bootable_USB](#bootable_usb)
 - [Openshift](#openshift)
+- [jenkins-cli](#jenkins-cli)
 
 
 #### User ####
@@ -80,8 +81,16 @@ Create your custom shortcuts
 
 cat <<EOF >> ~/.bash_aliases
 ### GIT ###
-
-
+alias ga='git add .'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gcf='git config'
+alias gcfg='git config --global'
+alias gcfs='git config --system'
+alias grv='git remote -v'
+alias gst='git status'
+alias gps='git push -u $(grurl)'
+alias grurl='git config --get remote.origin.url'
 ```
 
 
@@ -272,6 +281,8 @@ echo ' # mappings to have up and down arrow searching through history:
     eval $(ssh-agent -s)
     # add ssh key to the ssh-agent
     ssh-add ~/.ssh/id_rsa
+  send_command_remotely:
+    ssh -t user@server_host 'echo "My Sample Text" > /tmp/test.txt; cat /tmp/test.txt'
 ```
 
 #### Proxy ####
@@ -337,7 +348,7 @@ echo ' # mappings to have up and down arrow searching through history:
     git config [ --global | --system ] -e
     # --global = ~/.gitconfig
     # --system = /etc/gitconfig
-    git config [ --global | --system ] alias.st status # git st
+    git config [ --global | --system ] alias.st status # git st = git status
     git config [ --global | --system ] http.proxy http://[USERNAME]:[PASSWORD]@[PROXY_URL]:[PROXY_PORT]
     git config [ --global | --system ] http.sslVerify [true | false]
     git config [ --global | --system ] --get http.proxy  
@@ -368,7 +379,10 @@ echo ' # mappings to have up and down arrow searching through history:
     git push origin --delete NEW_BRANCH_NAME
     git push -u origin NEW_BRANCH_NAME
   git_clone_one_file:
-  
+    git archive --remote=git@github.com:sammervalgas/command-guide.git HEAD README.md | tar -xvf -
+    git archive --remote=git@github.com:sammervalgas/command-guide.git [YOUR_BRANCH_NAME] README.md | tar -xvf -
+    git archive --remote=git@github.com:sammervalgas/command-guide.git --prefix=[WHERE_TO_GO] [YOUR_BRANCH_NAME] [PATH/FILE] | tar -xvf -
+    
   get_commit_message:
      # .git/hook/commit-msg
      #!/bin/bash
@@ -426,8 +440,8 @@ echo ' # mappings to have up and down arrow searching through history:
   copy-to-container:
     docker cp [DESTINATION] [CONTAINER_NAME]:[FILE|FOLDER]
   enter_specific_container_folder:
-  	docker exec -it CONTAINER_NAME bash -c 'cd /some/dir; exec bash'
-	docker exec -it CONTAINER_NAME bash -c 'cd /some/dir; exec ${SHELL:-sh}' # Not usual but works.
+  	docker exec -it CONTAINER_NAME bash -c "cd /some/dir; exec bash"
+	docker exec -it CONTAINER_NAME bash -c "cd /some/dir; exec ${SHELL:-sh}" # Not usual but works.
   registry:
     mkdir -p /home/$USER/certs
     cd /home/$USER/certs
@@ -667,7 +681,30 @@ $ dd if=/home/sammervalgas/isos/my.iso of=/dev/sdb bs=1M
 2091008000 bytes (2,1 GB) copiados, 135,882 s, 15,4 MB/s
 
 ```
+#### jenkins-cli ####
+```yaml
+get_jars:
+	curl 'http://my.jenkins:8080/jnlpJars/jenkins-cli.jar' > "$HOME/jenkins-cli.jar"
+	echo '<User ID>:<API Token>' > "$HOME/.jenkins-cli-auth"
 
+ build_jcli: #Wrapper to jenkins-cli
+	cat <<EOF > $HOME/jcli
+	#!/bin/bash
+	if [[ -z "$1" ]]; 
+	then
+		echo "Error: Server name not found > jcli http://my.jenkins:8080"
+	else
+		# ${@:2} = Args starts after first ('$1') one
+		java -jar $HOME/jenkins-cli.jar -s $1 -noKeyAuth -auth @$HOME/.jenkins-cli-auth ${@:2}
+	fi
+	EOF
+	
+	chmod 755 $HOME/jcli
+	ln -s $HOME/jcli /usr/local/bin/
+
+	jcli http://my.jenkins:8080/ help
+	# Enjoy the silence ... (8-D.
+```
 
 #### Openshift ####
 
