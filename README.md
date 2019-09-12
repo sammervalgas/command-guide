@@ -707,6 +707,9 @@ get_jars:
 
 	jcli http://my.jenkins:8080/ help
 	# Enjoy the silence ... (8-D.
+	
+	# SecretHandler.groovy it is in jenkins-groovy github project
+	jcli http://my.jenkins:8080/ groovy = < SecretHandler.groovy '{AQAAABAAAAAQKOim4oesdIbJtOg0BT0kwDwaiO48vik/rcDU3dyT0MaQ=}'
 ```
 
 #### Openshift ####
