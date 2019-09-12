@@ -517,6 +517,9 @@ g = global
 
 add-text-one-line:
   sed -e '/002/s/append_me/' sample-for-sed.file
+covert_string_to_array:
+  arr=(`echo $(sed -e 's/\// /g' <<< "pos1/pos2/pos3/my-pos4/your-pos5/" )`)
+  for i in ${arr[@]};do echo "$i";done
 
 ```
 
