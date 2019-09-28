@@ -56,14 +56,14 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [Bootable_USB](#bootable_usb)
 - [Openshift](#openshift)
 - [jenkins-cli](#jenkins-cli)
-
+- [tcpdump](#tcpdump)
 
 #### User ####
 ```yaml
   create: useradd [USERNAME]
   update_pass: passwd [USERNAME]
   list_user: cat /etc/sudoers
-  
+
 ```
 
 #### Groups ####
@@ -78,7 +78,6 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 Create your custom shortcuts
 
 ```bash
-
 cat <<EOF >> ~/.bash_aliases
 ### GIT ###
 alias ga='git add .'
@@ -91,6 +90,7 @@ alias grv='git remote -v'
 alias gst='git status'
 alias gps='git push -u $(grurl)'
 alias grurl='git config --get remote.origin.url'
+EOF
 ```
 
 
@@ -118,7 +118,7 @@ echo ' # mappings to have up and down arrow searching through history:
   Show:
     lscpu
 
-  Cores: 
+  Cores:
     lscpu | grep -E '^Thread|^Core|^Socket|^CPU\('
 ```
 
@@ -153,7 +153,7 @@ echo ' # mappings to have up and down arrow searching through history:
     grep -Po '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' <<<'Find my server ip 127.0.0.1 or my.local.host'
     grep -Po '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' <<<$(cat cat /etc/hosts)
     cat /etc/hosts | grep -Po '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
-   
+
 ```
 
 
@@ -165,7 +165,7 @@ echo ' # mappings to have up and down arrow searching through history:
   find [PATH] -ilname [FILE|FOLDER] -print 2>/dev/null # Find without permission denied print
   find . ! -name [FILE|FOLDER] # Find except file name
   # More infos: http://www.hypexr.org/linux_find_help.php
-  
+
   parent_folder:
     find [PATH] -type d -maxdepth 1
     find [PATH] -type d -maxdepth 1 -ls
@@ -178,7 +178,7 @@ echo ' # mappings to have up and down arrow searching through history:
   select: vyp [highlight/copy/paste]
   copy_line: yy or Y
   delete_line: dd
-  paste: 
+  paste:
     p # to paste the copied or deleted text after the current line
     P # to paste the copied or deleted text before the current line
   multiple_lines:
@@ -214,7 +214,7 @@ echo ' # mappings to have up and down arrow searching through history:
 ```yaml
   # Reload daemon
   systemctl daemon-reload
-  
+
   # Commands
   systemctl status [PROCESS]
   systemctl stop [PROCESS]
@@ -226,11 +226,11 @@ echo ' # mappings to have up and down arrow searching through history:
 
 #### Remove ####
 ```yaml
-  dir: 
+  dir:
     rm -r [DIRECTORY] [*=ALL]
-  file: 
+  file:
     rm -f [FILE] [*=ALL]
-  per_day: 
+  per_day:
     find [FOLDER] -mtime +1 -exec rm -f {} \;
     find . -mtime +180 -delete;
 ```
@@ -309,7 +309,7 @@ echo ' # mappings to have up and down arrow searching through history:
     git init
   remote:
     git remote add -f origin <remote_repository_url>
-  credential: 
+  credential:
     # Store credential user pass after login one time.
     git config --global credential.helper store
     git config --global credential.helper cache #  memory
@@ -342,7 +342,7 @@ echo ' # mappings to have up and down arrow searching through history:
       git log --all
       git checkout <SHA1>
     specific_branch:
-      git clone --single-branch --branch BRANCH_NAME GIT_REPO_URL [REPO_NAME] 
+      git clone --single-branch --branch BRANCH_NAME GIT_REPO_URL [REPO_NAME]
   config:
     # edit
     git config [ --global | --system ] -e
@@ -382,12 +382,12 @@ echo ' # mappings to have up and down arrow searching through history:
     git archive --remote=git@github.com:sammervalgas/command-guide.git HEAD README.md | tar -xvf -
     git archive --remote=git@github.com:sammervalgas/command-guide.git [YOUR_BRANCH_NAME] README.md | tar -xvf -
     git archive --remote=git@github.com:sammervalgas/command-guide.git --prefix=[WHERE_TO_GO] [YOUR_BRANCH_NAME] [PATH/FILE] | tar -xvf -
-    
+
   get_commit_message:
      # .git/hook/commit-msg
      #!/bin/bash
-     	INPUT_FILE=$1
-	START_LINE=`head -n1 $INPUT_FILE`
+      INPUT_FILE=$1
+      START_LINE=`head -n1 $INPUT_FILE`
 
 ```
 
@@ -418,8 +418,8 @@ echo ' # mappings to have up and down arrow searching through history:
     # REF >>>>>> https://docs.docker.com/engine/reference/commandline/ps/
     docker ps -a -f 'exited=0' # 1 137 ...
     docker ps -a -f 'status=exited' # running | created | exited | paused | restarted
-    docker ps -a --filter 'status=running' --format 'table \n{{ .ID}} {{.Names}} --> {{.Ports}} {{.Size}}' 
-    
+    docker ps -a --filter 'status=running' --format 'table \n{{ .ID}} {{.Names}} --> {{.Ports}} {{.Size}}'
+
   exec:
     docker exec -it [CONTAINER_NAME] bash # Enter inside container bash
     docker exec -i [CONTAINER_NAME] wget http://github.com/sammervalgas # Run wget inside container
@@ -429,41 +429,41 @@ echo ' # mappings to have up and down arrow searching through history:
     docker inspect --format '{{ .NetworkSettings.IPAddress}}' [CONTAINER_NAME]
     docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [CONTAINER_NAME]
     docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [CONTAINER_NAME]
-    
-    # (Inspect First From Array) 
+
+    # (Inspect First From Array)
     # Get Docker Gateway
     docker inspect network bridge
-    docker inspect -f '{{ (index .IPAM.Config 0).Gateway }}' bridge 
-    
+    docker inspect -f '{{ (index .IPAM.Config 0).Gateway }}' bridge
+
   copy-to-host:
     docker cp [CONTAINER_NAME]:[FILE|FOLDER] [DESTINATION]
   copy-to-container:
     docker cp [DESTINATION] [CONTAINER_NAME]:[FILE|FOLDER]
   enter_specific_container_folder:
   	docker exec -it CONTAINER_NAME bash -c "cd /some/dir; exec bash"
-	docker exec -it CONTAINER_NAME bash -c "cd /some/dir; exec ${SHELL:-sh}" # Not usual but works.
+    docker exec -it CONTAINER_NAME bash -c "cd /some/dir; exec ${SHELL:-sh}" # Not usual but works.
   registry:
     mkdir -p /home/$USER/certs
     cd /home/$USER/certs
-    
+
     #Generate rsa private key
     openssl genrsa -out registry.docker.test.com.key 2048
-    
-    # Gerate CRS (Certificate Signing Request) 
+
+    # Gerate CRS (Certificate Signing Request)
     openssl req -new -key registry.docker.test.com.key -out registry.docker.test.com.csr
-    
+
     # Generate SSL Certificate (CRT) Self Sign.
     openssl x509 -req -days 365 -in registry.docker.test.com.csr -signkey registry.docker.test.com.key -out registry.docker.test.com.crt
-    
-    # Create folder certs.d registry docker 
+
+    # Create folder certs.d registry docker
     sudo mkdir -p /etc/docker/certs.d/registry.docker.test.com
-    
+
     # Copy CRT into certs.d docker registry
     sudo cp /home/$USER/certs/registry.docker.test.com.crt /etc/docker/certs.d/registry.docker.test.com/ca.pem
-    
+
     # as root -> Set registry on hosts
     echo "$(docker inspect -f '{{ (index .IPAM.Config 0).Gateway }}' bridge)    registry.docker.test.com" >> /etc/hosts
-    
+
     # Run registry container
     docker run -d -p 5000:5000 \
     -v "/home/$USER/certs:/certs" \
@@ -472,16 +472,16 @@ echo ' # mappings to have up and down arrow searching through history:
     -v /opt/registry/data:/var/lib/registry \
     --restart always \
     --name registry registry:2
-    
+
     # Check registry
     curl -i https://registry.docker.test.com:5000/v2/
-    
+
     # Docker pull and tag
     docker pull redis:alpine; docker tag redis:alpine registry.docker.test.com:5000/redis:alpine
-    
+
     # Push image to registry
     docker push registry.docker.test.com:5000/redis:alpine
-    
+
     # If face some problem look into know-issues []
 ```
 
@@ -529,7 +529,7 @@ covert_string_to_array:
   $ date +%s
  weekday uppercase:
   $ date +%^A
-  
+
   -  (hyphen) do not pad the field
   _  (underscore) pad with spaces
   0  (zero) pad with zeros
@@ -607,23 +607,23 @@ covert_string_to_array:
   config:
     npm config --global [DATA]
     npm config -g [DATA]
-    
+
   proxy:
     npm config -g set proxy "[PROXY_URL]"
     npm config -g set https-proxy "[PROXY_URL]"
-    
+
   ssl:
     npm config -g set strict-ssl false
-    
+
   config:
     npm config --global set registry "http://registry.npmjs.org/"
     # remove
     npm config --global unset registry
-  
+
   proxy:
     npm config set proxy http://<username>:<password>@<proxy-server-url>:<port>
     npm config set https-proxy http://<username>:<password>@<proxy-server-url>:<port>
-  
+
 ```
 
 #### Link ####
@@ -647,7 +647,7 @@ useradd jenkins
 # change password
 passwd jenkins
 
-# create sudoers user file inside sudoers.d! 
+# create sudoers user file inside sudoers.d!
 # Ex: jenkins
 sudo /bin/bash -c "echo '' > /etc/sudoers.d/jenkins"
 
@@ -670,7 +670,7 @@ $ lsblk
 .
 .
 .
-sdb               8:16   1  14,4G  0 disk 
+sdb               8:16   1  14,4G  0 disk
 └─sdb1            8:17   1  14,4G  0 part /run/media/sammervalgas/pendrive
 
 #####
@@ -685,31 +685,32 @@ $ dd if=/home/sammervalgas/isos/my.iso of=/dev/sdb bs=1M
 
 ```
 #### jenkins-cli ####
+
 ```yaml
 get_jars:
 	curl 'http://my.jenkins:8080/jnlpJars/jenkins-cli.jar' > "$HOME/jenkins-cli.jar"
 	echo '<User ID>:<API Token>' > "$HOME/.jenkins-cli-auth"
 
  build_jcli: #Wrapper to jenkins-cli
-	cat <<EOF > $HOME/jcli
-	#!/bin/bash
-	if [[ -z "$1" ]]; 
-	then
-		echo "Error: Server name not found > jcli http://my.jenkins:8080"
-	else
-		# ${@:2} = Args starts after first ('$1') one
-		java -jar $HOME/jenkins-cli.jar -s $1 -noKeyAuth -auth @$HOME/.jenkins-cli-auth ${@:2}
-	fi
-	EOF
-	
-	chmod 755 $HOME/jcli
-	ln -s $HOME/jcli /usr/local/bin/
+  cat <<EOF > $HOME/jcli
+  #!/bin/bash
+  if [[ -z "$1" ]];
+  then
+  echo "Error: Server name not found > jcli http://my.jenkins:8080"
+  else
+  # ${@:2} = Args starts after first ('$1') one
+  java -jar $HOME/jenkins-cli.jar -s $1 -noKeyAuth -auth @$HOME/.jenkins-cli-auth ${@:2}
+  fi
+  EOF
 
-	jcli http://my.jenkins:8080/ help
-	# Enjoy the silence ... (8-D.
-	
-	# SecretHandler.groovy it is in jenkins-groovy github project
-	jcli http://my.jenkins:8080/ groovy = < SecretHandler.groovy '{AQAAABAAAAAQKOim4oesdIbJtOg0BT0kwDwaiO48vik/rcDU3dyT0MaQ=}'
+  chmod 755 $HOME/jcli
+  ln -s $HOME/jcli /usr/local/bin/
+
+  jcli http://my.jenkins:8080/ help
+  # Enjoy the silence ... (8-D.
+
+  # SecretHandler.groovy it is in jenkins-groovy github project
+  jcli http://my.jenkins:8080/ groovy = < SecretHandler.groovy '{AQAAABAAAAAQKOim4oesdIbJtOg0BT0kwDwaiO48vik/rcDU3dyT0MaQ=}'
 ```
 
 #### Openshift ####
@@ -721,9 +722,9 @@ oc get dc [deployment-config]
 oc get svc [service]
 oc get bc [buildConfig]
 
-Create: 
+Create:
   NewApp:
-	  oc new-app app1
+    oc new-app app1
 Edit:
 	oc edit ... -n [NAMESPACE]
 
@@ -743,14 +744,22 @@ Pods:
   	oc get pod [NAME] -o wide
   	oc describe pod [NAME]
   	oc delete pod [NAME]
-  
+
 Nodes:
-	oc get nodes 
+	oc get nodes
 	oc get nodes -o wide
 	oc get nodes -o yaml | json
 
 Formatted:
 	oc get pods -n [NAMESPACE] -o wide | awk '{printf "%s \t\t %s \n", $1, $7}'
+
+```
+
+#### tcpdump ####
+
+```bash
+# wait GET request on 8080 port
+sudo tcpdump 'dst port 8080 and tcp[32:4] = 0x47455420'
 
 ```
 
