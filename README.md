@@ -760,7 +760,6 @@ Formatted:
 ```bash
 # wait GET request on 8080 port
 sudo tcpdump 'dst port 8080 and tcp[32:4] = 0x47455420'
-
 ```
 
 
