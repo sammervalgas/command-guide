@@ -755,6 +755,30 @@ Formatted:
 
 ```
 
+#### override commands ####
+
+
+```bash
+# cd:
+cat <<EOF >> ~/.bashrc
+function alerta () {
+  if [[ $PWD == '/tmp' ]]
+  then
+    echo "[$(date +%F-%A-%T)] - User $USER entered at $PWD."
+  fi
+}
+
+function cd () {
+  builtin cd "$@" && alerta
+}
+EOF
+
+history:
+  echo 'export HISTTIMEFORMAT="%d/%m/%y %T "' >> ~/.bash_profile
+
+```
+
+
 #### tcpdump ####
 
 ```bash
