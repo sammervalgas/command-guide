@@ -102,3 +102,12 @@ sudo certbot --authenticator standalone --installer nginx -d [MY.DOMAIN] --pre-h
 ```bash
 sudo sysctl -w vm.max_map_count=262144
 ```
+
+#### NPM ####
+
+ERROR: ***sh: 1: node: Permission denied***
+
+SOLUTION
+```bash
+npm config set user 0
+npm config set unsafe-perm true
