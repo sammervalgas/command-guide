@@ -57,6 +57,9 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [Openshift](#openshift)
 - [jenkins-cli](#jenkins-cli)
 - [tcpdump](#tcpdump)
+- [Firewall](#Firewall)
+- [ports](#ports)
+
 
 #### User ####
 ```yaml
@@ -90,6 +93,28 @@ alias grv='git remote -v'
 alias gst='git status'
 alias gps='git push -u $(grurl)'
 alias grurl='git config --get remote.origin.url'
+
+### DOCKER ###
+alias dps='docker ps '
+alias dpsa='docker ps -a '
+alias dpsqa='docker ps -qa '
+alias dim='docker images '
+alias dima='docker images -a'
+alias drm='docker rm '
+alias drma='docker rm -f $(docker ps -qa)'
+alias drmexited='docker rm -f $(dpsqa -f status=exited)'
+alias dinsp='docker inspect '
+alias dlogs='docker logs -f '
+alias dexec='docker '
+alias drun="docker run -d -i -t "
+alias dbuild='docker build '
+alias dstop='docker stop '
+alias dstart='docker start '
+alias drestart='docker restart '
+alias dstopa='docker stop $(dpsqa)'
+alias dstarta='docker start $(dpsqa)'
+alias drestarta='docker restart $(dpsqa)'
+
 EOF
 ```
 
@@ -143,7 +168,9 @@ echo ' # mappings to have up and down arrow searching through history:
     hostnamectl status
   add:
     sudo /bin/bash -c 'echo -e "198.162.0.1\tmy.sample.host" >> /etc/hosts'
-
+  public_address:
+    curl ifconfig.co
+    curl ifconfig.me
 ```
 
 #### Grep ####
@@ -186,6 +213,14 @@ echo ' # mappings to have up and down arrow searching through history:
     delete: 10dd
   replace_all:
      :%s/search_string/replacement_string/g
+```
+
+#### for ####
+```yaml
+copy_from_list_dir:
+  for i in $(ls); do cp "$i" /tmp; done
+escape:
+  for i in $(ls); do echo "<resource-root path=\"$i\" />"; done
 ```
 
 #### Virtualbox ####
@@ -775,9 +810,20 @@ EOF
 
 history:
   echo 'export HISTTIMEFORMAT="%d/%m/%y %T "' >> ~/.bash_profile
+  # To overwrite the history file with the current shell's
+  history -w
+  history -d $(history | tail -1 - | awk '{print $1}') | vi ~/.bash_history
+  for i in {$(history | tail -1 - | awk '{print $1}')..[END_POSITION]}; do history -d "$i"; done
 
 ```
 
+### Firewall ####
+[http://ask.xmodulo.com/open-port-firewall-centos-rhel.html](http://ask.xmodulo.com/open-port-firewall-centos-rhel.html)
+```bash
+  sudo systemctl stop firewalld
+  sudo systemctl disable firewalld
+
+```
 
 #### tcpdump ####
 
@@ -786,6 +832,15 @@ history:
 sudo tcpdump 'dst port 8080 and tcp[32:4] = 0x47455420'
 ```
 
+#### ports ####
+```yaml
+list_all:
+  sudo lsof -i -P -n
+check_listen:
+  sudo lsof -i -P -n | grep LISTEN
+  sudo netstat -tulpn | grep LISTEN
+
+```
 
 <!--
 #### Tricks ####
