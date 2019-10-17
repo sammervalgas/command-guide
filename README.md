@@ -24,41 +24,41 @@ Commands
 --------
 A bunch of command lines designed to help us day by day, bellow are the summary of commands.
 
-- [User](#user)
-- [Groups](#groups)
-- [Alias](#alias)
-- [CheckOS](#checkos)
-- [AutoComplete](#AutoComplete)
+- [ALIAS](#alias)
+- [AUTOCOMPLETE](#AutoComplete)
+- [BOOTABLE_USB](#bootable_usb)
+- [CHECKOS](#checkos)
+- [CNTLM](#cntlm)
 - [CPU](#cpu)
-- [cntlm](#cntlm)
-- [hostname](#hostname)
-- [find](#find)
-- [vim](#vim)
-- [virtualbox](#virtualbox)
-- [disk](#disk)
-- [systemctl](#systemctl)
-- [remove](#remove)
-- [ssl](#ssl)
-- [ssh](#ssh)
-- [proxy](#proxy)
-- [git](#git)
-- [docker](#docker)
-- [curl](#curl)
-- [sed](#sed)
-- [tricks](#tricks)
-- [date](#date)
-- [pip](#pip)
-- [rhel](#rhel)
-- [npm](#npm)
-- [link](#link)
-- [Kill](#kill)
-- [Privileges](#privileges)
-- [Bootable_USB](#bootable_usb)
-- [Openshift](#openshift)
-- [jenkins-cli](#jenkins-cli)
-- [tcpdump](#tcpdump)
-- [Firewall](#Firewall)
-- [ports](#ports)
+- [CURL](#curl)
+- [DATE](#date)
+- [DISK](#disk)
+- [DOCKER](#docker)
+- [FIND](#find)
+- [FIREWALL](#Firewall)
+- [GIT](#git)
+- [GROUPS](#groups)
+- [HOSTNAME](#hostname)
+- [JENKINS-cli](#jenkins-cli)
+- [KILL](#kill)
+- [LINK](#link)
+- [NPM](#npm)
+- [OPENSHIFT](#openshift)
+- [PIP](#pip)
+- [PORTS](#ports)
+- [PRIVILEGES](#privileges)
+- [PROXY](#proxy)
+- [REMOVE](#remove)
+- [RHEL](#rhel)
+- [SED](#sed)
+- [SSH](#ssh)
+- [SSL](#ssl)
+- [SYSTEMCTL](#systemctl)
+- [TCPDUMP](#tcpdump)
+- [TRICKS](#tricks)
+- [USER](#user)
+- [VIM](#vim)
+- [VIRTUALBOX](#virtualbox)
 
 
 #### User ####
@@ -352,6 +352,8 @@ escape:
   add:
     git add .
     git add -- [FILE|FOLDER]
+  current_branch_name:
+    git rev-parse --abbrev-ref HEAD
   commit:
     git commit -m "First commit"
     git commit -m -a "Commit with add"
@@ -409,10 +411,12 @@ escape:
   rename_local_branch:
     git branch -m NEW_BRANCH_NAME
 
-  rename_remote_branch
+  rename_remote_branch:
     git branch -m NEW_BRANCH_NAME
     git push origin --delete NEW_BRANCH_NAME
     git push -u origin NEW_BRANCH_NAME
+    change_remote_url:
+      git remote set-url origin [GIT_REPO_URL]
   git_clone_one_file:
     git archive --remote=git@github.com:sammervalgas/command-guide.git HEAD README.md | tar -xvf -
     git archive --remote=git@github.com:sammervalgas/command-guide.git [YOUR_BRANCH_NAME] README.md | tar -xvf -
