@@ -480,7 +480,7 @@ escape:
     docker cp [DESTINATION] [CONTAINER_NAME]:[FILE|FOLDER]
   enter_specific_container_folder:
   	docker exec -it CONTAINER_NAME bash -c "cd /some/dir; exec bash"
-    docker exec -it CONTAINER_NAME bash -c "cd /some/dir; exec ${SHELL:-sh}" # Not usual but works.
+    docker exec -it CONTAINER_NAME bash -c "cd /some/dir; exec ${SHELL:-sh}" # Not usual but works. Change shell
   registry:
     mkdir -p /home/$USER/certs
     cd /home/$USER/certs
