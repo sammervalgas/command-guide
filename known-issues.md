@@ -4,7 +4,7 @@ Known issues (Problems Solutions)
 
 ## Docker ##
 
-#### :red_circle: ERROR ####
+###### :red_circle: ERROR ######
 
 ```bash
 $ docker run -ti -p 8080:8080 -p 50000:50000 -v /opt/jenkins:/var/jenkins_home jenkins
@@ -13,7 +13,7 @@ $ docker run -ti -p 8080:8080 -p 50000:50000 -v /opt/jenkins:/var/jenkins_home j
 > touch: cannot touch '/var/jenkins_home/copy_reference_file.log': Permission denied <br/>
 > Can not write to /var/jenkins_home/copy_reference_file.log. Wrong volume permissions?<br/><br/>
 
-#### :heavy_check_mark: SOLUTION ####
+###### :heavy_check_mark: SOLUTION ######
 ```bash
 $ sudo chmod -R 1000 /var/jenkins_home
 or
@@ -23,13 +23,13 @@ $ docker run -it -u $(id -g) -p 8080:8080 -p 50000:50000 -v /var/jenkins_home:/v
 ```
 <br/><br/>
 
-#### :red_circle: ERROR ####
+###### :red_circle: ERROR ######
 
 ***_Get https://registry.docker.test.com/v2/: net/http: TLS handshake timeout in Docker_***
 
 > :warning:IMPORTANT: If you are behind proxy environment, setup http-proxy.conf daemon docker
 
-#### :heavy_check_mark: SOLUTION ####
+###### :heavy_check_mark: SOLUTION ######
 
 ```bash
 cat /etc/systemd/system/docker.service.d/http-proxy.conf 
@@ -53,7 +53,7 @@ systemctl restart docker
 systemctl show --property Environment docker
 ```
 ---
-#### :red_circle: ERROR ####
+###### :red_circle: ERROR ######
 ***_x509: certificate signed by unknown authority_***
 
 
@@ -61,7 +61,7 @@ Add into daemon.json the follow snippet according docker installation type: <br/
 * docker-ce: /etc/docker/daemon.json <br/>
 * redhat: /etc/sysconfig/docker <br/>
 
-#### :heavy_check_mark: SOLUTION ####
+###### :heavy_check_mark: SOLUTION ######
 
 ```json
 {
@@ -79,11 +79,11 @@ systemctl show --property Environment docker
 ```
 ---
 ## Certbot ##
-#### :red_circle: ERROR ####
+###### :red_circle: ERROR ######
 ***_Problems with renew...<br/>
 Client with the currently selected authenticator does not support any combination of challenges that will satisfy the CA_***
 
-#### :heavy_check_mark: SOLUTION ####
+###### :heavy_check_mark: SOLUTION ######
 ```bash
 sudo certbot --authenticator standalone --installer nginx -d [MY.DOMAIN] --pre-hook "service nginx stop" --post-hook "service nginx start"
 ```
@@ -93,12 +93,20 @@ sudo certbot --authenticator standalone --installer nginx -d [MY.DOMAIN] --pre-h
 
 ## DOCKER SONARQUBE ##
 
-#### :red_circle: ERROR ####
+###### :red_circle: ERROR ######
     
     max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 
-#### :heavy_check_mark: SOLUTION ####
+###### :heavy_check_mark: SOLUTION ######
 
 ```bash
 sudo sysctl -w vm.max_map_count=262144
 ```
+
+## GIT ##
+###### :red_circle: ERROR ######
+    On push
+    remote: Permission to my/ownrepo.git denied to ****.
+    
+###### :heavy_check_mark: SOLUTION ######
+    git remote set-url origin git@myownrepo.git
