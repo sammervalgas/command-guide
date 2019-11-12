@@ -180,7 +180,8 @@ echo ' # mappings to have up and down arrow searching through history:
     grep -Po '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' <<<'Find my server ip 127.0.0.1 or my.local.host'
     grep -Po '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' <<<$(cat cat /etc/hosts)
     cat /etc/hosts | grep -Po '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
-
+ second_line:
+    echo -e 'red \n blue \n green \n grey' \n black | grep e | awk 'NR==2'
 ```
 
 
@@ -397,6 +398,11 @@ escape:
     git reset .
   remove:
     git rm -- [FILE|FOLDER]
+  rev:
+    git rev-list
+    git rev-parse @ # get local commit hash
+    git rev-parse @{u} # get remote commit hash
+    git ls-remote [GIT_REPO_URL] # list remote commit hash
   log:
     git log -- [FILE|FOLDER]
     git log -p -2 --all --full-history -- *[FILE|FOLDER]*
