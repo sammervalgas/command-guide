@@ -34,6 +34,7 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [DATE](#date)
 - [DISK](#disk)
 - [DOCKER](#docker)
+- [DUPLICATES](#DUPLICATES)
 - [FIND](#find)
 - [FIREWALL](#Firewall)
 - [GIT](#git)
@@ -339,12 +340,19 @@ escape:
 
 ```
 
+#### DUPLICATES ####
+```bash
+uniq # Remove duplicates
+uniq -d #get duplicates
+```
+
 #### Git ####
 ```yaml
   init:
     git init
   remote:
     git remote add -f origin <remote_repository_url>
+    git branch -r | sed -e 's/^.*origin\///g' | uniq #Get all remote branches removing duplicates 
   credential:
     # Store credential user pass after login one time.
     git config --global credential.helper store
@@ -414,6 +422,7 @@ escape:
   recovery_detached:
     git reflog
     git checkout -b [BRANCH_NAME] [ID|HEAD~<NUMBER>]
+    
   rename_local_branch:
     git branch -m NEW_BRANCH_NAME
 
