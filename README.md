@@ -468,6 +468,10 @@ uniq -d #get duplicates
       docker logs -f --tail 10 [CONTAINER_NAME]
     since:
       docker logs -f --since 1m [CONTAINER_NAME]
+  save_image_reload:
+  	docker save --output image.tar [IMAGE_ID]
+	docker image prune -fa
+	docker load --input image.tar
   filter:
     # REF >>>>>> https://docs.docker.com/engine/reference/commandline/ps/
     docker ps -a -f 'exited=0' # 1 137 ...
