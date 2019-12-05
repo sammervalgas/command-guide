@@ -853,6 +853,9 @@ history:
 ```bash
 # wait GET request on 8080 port
 sudo tcpdump 'dst port 8080 and tcp[32:4] = 0x47455420'
+
+# tcpdump: NFLOG link-layer type filtering not implemented
+sudo tcpdump -i 5 'dst port 8080 and tcp[32:4] = 0x47455420'
 ```
 
 #### ports ####
