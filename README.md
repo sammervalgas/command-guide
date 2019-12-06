@@ -40,6 +40,7 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [GIT](#git)
 - [GROUPS](#groups)
 - [HOSTNAME](#hostname)
+- [JBOSS-CLI](#jboss-cli)
 - [JENKINS-cli](#jenkins-cli)
 - [KILL](#kill)
 - [LINK](#link)
@@ -742,6 +743,34 @@ $ dd if=/home/sammervalgas/isos/my.iso of=/dev/sdb bs=1M
 2091008000 bytes (2,1 GB) copiados, 135,882 s, 15,4 MB/s
 
 ```
+
+#### jboss-cli ####
+```yaml
+Connect:
+   - $JBOSS_HOME/bin/jboss-cli -c
+
+Enable Rbac:
+   # Change directory to the authorisation node
+   - cd /core-service=management/access=authorization 
+   
+   # command lists the current role names
+   - ls -l 
+   
+   # To turn provider on RBAC
+   - :write-attribute(name=provider, value=rbac) # After Restart JBoss
+   
+   # Set myadmin user to SuperUser
+   # ./role-mapping=SuperUser/include=ALIAS:add(name=USERNAME, type=USER)
+   ./role-mapping=SuperUser/include=user-MyAdmin:add(name=myadmin, type=USER)
+   
+   # Add to a group
+   ./role-mapping=Deployer/include=devops-group:add(name=leader-devs, type=GROUP)
+   ./role-mapping=Monitor/include=monitoring-group:add(name=devs, type=GROUP)
+
+
+```
+
+
 #### jenkins-cli ####
 
 ```yaml
