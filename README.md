@@ -25,6 +25,7 @@ Commands
 A bunch of command lines designed to help us day by day, bellow are the summary of commands.
 
 - [ALIAS](#alias)
+- [AWK](#awk)
 - [AUTOCOMPLETE](#AutoComplete)
 - [BOOTABLE_USB](#bootable_usb)
 - [CHECKOS](#checkos)
@@ -61,6 +62,15 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [USER](#user)
 - [VIM](#vim)
 - [VIRTUALBOX](#virtualbox)
+
+
+#### awk ####
+```yaml
+ show_block_text:
+   cat -n standalone.xml | grep -i datasources   
+   awk 'NR < 152 { next } { print } NR == 201 { exit }' standalone.xml
+
+```
 
 
 #### User ####
