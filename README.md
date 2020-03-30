@@ -906,7 +906,25 @@ check_listen:
   sudo netstat -tulpn | grep LISTEN
 
 ```
+#### tomcat ####
 
+```bash
+# ENVIRONMENT
+TOMCAT_USER=my_username
+TOMCAT_PASS=my_password
+TOMCAT_HOST=localhost
+TOMCAT_PORT=8080
+
+CONTEXT_PATH=/my_application_name
+WAR_FILE=target/my_application.war  # or $(find . -name "*.war" -type f) 
+
+# DEPLOY
+curl --upload-file $WAR_FILE "http://$TOMCAT_USER:$TOMCAT_PASS@$TOMCAT_HOSTL:$TOMCAT_PORT/manager/text/deploy?path=$CONTEXT_PATH&update=true"
+
+#UNDEPLOY
+curl "http://$TOMCAT_USER:$TOMCAT_PASS@$TOMCAT_HOSTL:$TOMCAT_PORT/manager/text/undeploy?path=$CONTEXT_PATH"
+
+```
 <!--
 #### Tricks ####
 ```yaml
