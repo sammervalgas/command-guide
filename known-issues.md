@@ -110,3 +110,13 @@ sudo sysctl -w vm.max_map_count=262144
     
 ###### :heavy_check_mark: SOLUTION ######
     git remote set-url origin git@myownrepo.git
+    
+## NGINX ##
+###### :red_circle: ERROR ######
+    failed (13: Permission denied) while connecting to upstream
+
+###### :heavy_check_mark: SOLUTION ######
+    setsebool -P httpd_can_network_connect 1
+    sudo cat /var/log/audit/audit.log | grep nginx | grep denied
+    sudo cat /var/log/audit/audit.log | grep nginx | grep denied | audit2allow -M mynginx
+    sudo semodule -i mynginx.pp
