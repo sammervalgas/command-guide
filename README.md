@@ -925,6 +925,8 @@ curl --upload-file $WAR_FILE "http://$TOMCAT_USER:$TOMCAT_PASS@$TOMCAT_HOSTL:$TO
 curl "http://$TOMCAT_USER:$TOMCAT_PASS@$TOMCAT_HOSTL:$TOMCAT_PORT/manager/text/undeploy?path=$CONTEXT_PATH"
 
 ```
+	IMPORTANT: tomcat-users.xml has to be setup with user that has admin, manager and manager-script roles.
+
 <!--
 #### Tricks ####
 ```yaml
