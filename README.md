@@ -851,6 +851,21 @@ Formatted:
 	oc get pods -n [NAMESPACE] -o wide | awk '{printf "%s \t\t %s \n", $1, $7}'
 
 ```
+#### Maven ####
+
+```bash
+
+mvn clean package
+
+mvn clean install
+
+mvn sonar:sonar -Dsonar.login='' ....
+
+# cleanup dependencies
+mvn dependency:purge-local-repository
+
+```
+
 
 #### override commands ####
 
