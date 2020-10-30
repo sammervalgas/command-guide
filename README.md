@@ -45,7 +45,7 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [JENKINS-cli](#jenkins-cli)
 - [KILL](#kill)
 - [LINK](#link)
-- [LOWERCASE/UPPERCASE] (#case)
+- [LOWERCASE/UPPERCASE](#case)
 - [NPM](#npm)
 - [OPENSHIFT](#openshift)
 - [PIP](#pip)
