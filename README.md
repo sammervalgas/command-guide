@@ -45,6 +45,7 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [JENKINS-cli](#jenkins-cli)
 - [KILL](#kill)
 - [LINK](#link)
+- [LOWERCASE/UPPERCASE] (#case)
 - [NPM](#npm)
 - [OPENSHIFT](#openshift)
 - [PIP](#pip)
@@ -148,6 +149,28 @@ echo ' # mappings to have up and down arrow searching through history:
 # mapping to have [Tab] and [Shift]+[Tab] to cycle through all the possible completions:
 "\t": menu-complete
 "\e[Z": menu-complete-backward' >> ~/.inputrc
+```
+
+### CASE ###
+
+```bash
+#UPPERCASE
+
+UPPER_MSG='THIS IS UPPER'
+#tr
+echo $UPPER_MSG | tr [:upper:] [:lower:]
+#AWK
+echo $LOWER_MSG | awk '{ print tolower($0)}'
+
+# LOWERCASE
+LOWER_MSG='this is lower'
+
+echo $LOWER_MSG | tr [:lower:] [:upper:]
+echo $LOWER_MSG | awk '{ print toupper($0)}' 
+
+# Bash4.0
+${UPPER_MSG,,*} #lowercase
+${LOWER_MSG^^*} #uppercase
 ```
 
 #### CPU ####
