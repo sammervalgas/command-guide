@@ -158,14 +158,14 @@ echo ' # mappings to have up and down arrow searching through history:
 
 UPPER_MSG='THIS IS UPPER'
 #tr
-echo $UPPER_MSG | tr [:upper:] [:lower:]
+echo $UPPER_MSG | tr '[:upper:]' '[:lower:]'
 #AWK
 echo $LOWER_MSG | awk '{ print tolower($0)}'
 
 # LOWERCASE
 LOWER_MSG='this is lower'
 
-echo $LOWER_MSG | tr [:lower:] [:upper:]
+echo $LOWER_MSG | tr '[:lower:]' '[:upper:]'
 echo $LOWER_MSG | awk '{ print toupper($0)}' 
 
 # Bash4.0
