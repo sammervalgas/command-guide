@@ -41,6 +41,7 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [GIT](#git)
 - [GROUPS](#groups)
 - [HOSTNAME](#hostname)
+- [JAVA](#java)
 - [JBOSS-CLI](#jboss-cli)
 - [JENKINS-cli](#jenkins-cli)
 - [KILL](#kill)
@@ -207,6 +208,24 @@ ${LOWER_MSG^^*} #uppercase
     curl ifconfig.co
     curl ifconfig.me
 ```
+
+#### Java ####
+
+- Generating signed jar:
+```bash
+
+# Generate key
+keytool -genkey -v -keystore MY_KEYSTORE.key -keyalg RSA -keysize 2048 -validity 10000 -alias MY_ALIAS
+
+# Seflsigning Cert
+keytool -selfcert -keystore MY_KEYSTORE.key -alias MY_ALIAS
+
+# Signing jar
+jarsigner -keystore MY_KEYSTORE.key MY_GENERATED.jar MY_ALIAS
+
+
+```
+
 
 #### Grep ####
 
