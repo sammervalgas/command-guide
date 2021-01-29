@@ -508,8 +508,11 @@ uniq -d #get duplicates
     docker rm <container | $(docker ps -q)>
   remove-images:
     docker rmi <image | $(docker images -q)>
+    
   remove_untagged_images:
-    docker rmi $(docker images -a | grep "^<none>" | awk '{print $3}') [--force]
+    docker rmi $(docker images -a | grep -i "^<none>" | awk '{print $3}') [--force]
+    docker rmi -f $(docker images --filter "dangling=true")
+    
   build:
     docker build -t [IMAGE_TAGGED_NAME]:[IMAGE_VERSION] -f <Dockerfile> .
   run:
