@@ -181,6 +181,16 @@ ${LOWER_MSG^^*} #uppercase
 
   Cores:
     lscpu | grep -E '^Thread|^Core|^Socket|^CPU\('
+    
+    cpuid Command – Shows x86 CPU.
+    dmidecode Command – Shows Linux Hardware Info.
+    lshw -> (Installable)
+    
+  Tools Installation:
+    Inxi Tool – Shows Linux System Information. ...
+    lshw Tool – List Hardware Configuration. ...
+    hardinfo  – Shows Hardware Info in GTK+ Window. ...
+    hwinfo    – Shows Present Hardware Info.
 ```
 
 #### Cntlm ####
