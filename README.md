@@ -974,6 +974,8 @@ list_all:
 check_listen:
   sudo lsof -i -P -n | grep LISTEN
   sudo netstat -tulpn | grep LISTEN
+get_process_from_port:  
+lsof -i:8080 | awk '{print $2}' | head -2 | tail -1
 
 ```
 #### tomcat ####
