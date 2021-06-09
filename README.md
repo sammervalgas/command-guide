@@ -215,8 +215,11 @@ ${LOWER_MSG^^*} #uppercase
   add:
     sudo /bin/bash -c 'echo -e "198.162.0.1\tmy.sample.host" >> /etc/hosts'
   public_address:
-    curl ifconfig.co
+    curl -4 ifconfig.co
     curl ifconfig.me
+  get_ip:
+    ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//' # Linux
+    ifconfig | grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1
 ```
 
 #### Java ####
