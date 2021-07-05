@@ -827,6 +827,9 @@ Enable Rbac:
    # To turn provider on RBAC
    - :write-attribute(name=provider, value=rbac) # After Restart JBoss
    
+   # Disable RBAC
+   - :write-attribute(name=provider, value=simple) # After Restart JBoss
+   
    # Set myadmin user to SuperUser
    # ./role-mapping=SuperUser/include=ALIAS:add(name=USERNAME, type=USER)
    ./role-mapping=SuperUser/include=user-MyAdmin:add(name=myadmin, type=USER)
