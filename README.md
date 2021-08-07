@@ -508,6 +508,20 @@ uniq -d #get duplicates
      #!/bin/bash
       INPUT_FILE=$1
       START_LINE=`head -n1 $INPUT_FILE`
+  
+  git_merge:
+  	local:
+		# merge: ... - not something we can merge
+		git checkout BRANCH_NAME_TO_MERGE
+		git checkout TARGET_BRANCH_NAME
+		git merge BRANCH_NAME_TO_MERGE
+	remote:
+		git fetch origin REMOTE_BRANCH
+		git checkout TARGET_BRANCH_NAME
+		git merge origin/REMOTE_BRANCH
+  git_discover_branch:
+  	
+  
 
 ```
 
