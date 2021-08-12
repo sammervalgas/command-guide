@@ -22,12 +22,19 @@
   ## SECRET 
   
   ## SERVICE ACCOUNT (SA)
+  
+  ## EVENTS
+    get_events:
+      kubectl -n <namespace> get events
 
 ```
 
 ### COMMANDS
 
 ```bash
+
+$ kubectl -n <namespace-name> describe pod <pod-name>
+$ kubectl -n <namespace-name> logs -p  <pod-name> 
 
 $ kubectl get pods -o wide
 $ kubectl get pod nginx -o yaml
