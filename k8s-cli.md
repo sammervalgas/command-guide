@@ -1,7 +1,10 @@
 
 <div id="k8s" > </div>
 ## Kubernetes CLI 
-```bash
+
+### RESOURCES
+
+```yaml
 
   ## DEPLOYMENT
   deployment_history:
