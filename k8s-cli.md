@@ -55,6 +55,9 @@ fe00::2	ip6-allrouters
 10.200.0.4	nginx
 
 
+$ kubectl exec --stdin --tty <podname> -- /bin/bash
+
+
 
 ```
 
