@@ -266,6 +266,9 @@ jarsigner -keystore MY_KEYSTORE.key MY_GENERATED.jar MY_ALIAS
     find [PATH] -type d -maxdepth 1 -ls
   remove_directories_not_in_path:
   find . -type d -not -path "*directory1" -not -path "*directory2" -maxdepth 1 -exec rm -rf '{}' \;
+  
+  #files
+  find . -type f
 ```
 
 #### Vim ####
@@ -1028,3 +1031,11 @@ curl "http://$TOMCAT_USER:$TOMCAT_PASS@$TOMCAT_HOSTL:$TOMCAT_PORT/manager/text/u
 
 ```
 -->
+
+
+#### bash ####
+
+```bash
+# list recursive
+ls -R . | awk '/:$/&&f{s=$0;f=0}/:$/&&!f{sub(/:$/,"");s=$0;f=1;next}NF&&f{ print s"/"$0 }'
+```
