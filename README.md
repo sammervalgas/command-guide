@@ -44,6 +44,7 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 - [JAVA](#java)
 - [JBOSS-CLI](#jboss-cli)
 - [JENKINS-cli](#jenkins-cli)
+- [JWT](#JWT)
 - [KILL](#kill)
 - [LINK](#link)
 - [LOWERCASE/UPPERCASE](#case)
@@ -192,6 +193,20 @@ ${LOWER_MSG^^*} #uppercase
     hardinfo  – Shows Hardware Info in GTK+ Window. ...
     hwinfo    – Shows Present Hardware Info.
 ```
+
+#### JWT ####
+```bash
+# Decoding jwt token and reading the json objects
+
+curl --location --request POST 'https://localhost/auth/realms/Providers/protocol' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'grant_type=pass' \
+--data-urlencode 'client_id=mobile' \
+--data-urlencode 'username=email@email.com.br' \
+--data-urlencode 'password=123456' \
+--data-urlencode 'client_secret=MYSECRET' | jq '.access_token' | sed 's/\"//g' | jwt
+```
+
 
 #### Cntlm ####
 ```yaml
