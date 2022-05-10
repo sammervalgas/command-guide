@@ -473,6 +473,8 @@ uniq -d #get duplicates
       git checkout <SHA1>
     specific_branch:
       git clone --single-branch --branch BRANCH_NAME GIT_REPO_URL [REPO_NAME]
+  gitignore_update:
+  	git rm -rf --cached . && git add .
   config:
     # edit
     git config [ --global | --system ] -e
