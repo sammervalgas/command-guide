@@ -183,6 +183,8 @@ alias dnr='dotnet restore'
 
 alias flutter-ios-deintegrate="flutter clean && cd ios && pod deintegrate && rm -f Podfil* && flutter pub cache repair && flutter pub get && flutter pub upgrade"
 alias fcb="flutter clean && flutter pub get && flutter build"
+
+#Angular
 alias ngm='ng g m'
 alias ngc='ng g c'
 alias ngs='ng g s'
