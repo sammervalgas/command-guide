@@ -99,6 +99,43 @@ Create your custom shortcuts
 ```bash
 cat <<EOF >> ~/.bash_aliases
 ### GIT ###
+# Linux
+alias c=clear
+alias cpa='rsync -rtv '
+alias rexit='history -c && echo null > ~/.bash_history && exit '
+alias l='ls -lh'
+alias ll='ls -lah'
+alias ltra='ls -ltr'
+
+# Docker
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias dpsqa='docker ps -qa '
+alias dim='docker images '
+alias dima='docker images -a'
+alias drm='docker rm '
+alias drmfa='docker rm -f $(docker ps -qa)'
+alias drmexited='docker rm -f $(dpsqa -f status=exited)'
+alias dinsp='docker inspect '
+alias dlogs='docker logs -f '
+alias dexec='docker exec -it '
+alias drun='docker run -d -i -t '
+alias dbuild='docker build -t '
+alias dstop='docker stop '
+alias dstart='docker start '
+alias drestart='docker restart '
+alias dstopa='docker stop $(dpsqa)'
+alias dstarta='docker start $(dpsqa)'
+alias drestarta='docker restart $(dpsqa)'
+
+# Vagrant
+alias vup='vagrant up'
+alias vprovison='vagrant provision'
+alias vdestroy='vagrant destroy'
+alias vupdate='vagrant box update'
+alias vssh='vagrant ssh'
+
+# Git
 alias ga='git add .'
 alias gb='git branch'
 alias gba='git branch -a'
@@ -109,27 +146,47 @@ alias grv='git remote -v'
 alias gst='git status'
 alias gps='git push -u $(grurl)'
 alias grurl='git config --get remote.origin.url'
+alias addssh='eval $(ssh-agent) && ssh-add -K ~/.ssh/id_rsa'
+alias mac_address='ifconfig en1 | awk "/ether/{print }"'
 
-### DOCKER ###
-alias dps='docker ps '
-alias dpsa='docker ps -a '
-alias dpsqa='docker ps -qa '
-alias dim='docker images '
-alias dima='docker images -a'
-alias drm='docker rm '
-alias drma='docker rm -f $(docker ps -qa)'
-alias drmexited='docker rm -f $(dpsqa -f status=exited)'
-alias dinsp='docker inspect '
-alias dlogs='docker logs -f '
-alias dexec='docker '
-alias drun="docker run -d -i -t "
-alias dbuild='docker build '
-alias dstop='docker stop '
-alias dstart='docker start '
-alias drestart='docker restart '
-alias dstopa='docker stop $(dpsqa)'
-alias dstarta='docker start $(dpsqa)'
-alias drestarta='docker restart $(dpsqa)'
+# Flutter
+alias fr='flutter run -d'
+alias fd='flutter devices'
+alias fe='flutter emulators'
+alias fel='flutter emulators --launch'
+alias fdoc='flutter doctor'
+alias iphone='open -a Simulator'
+
+# K8S
+alias kp="kubectl --kubeconfig='.kube/production/config' -n production"
+alias kpn="kubectl --kubeconfig='.kube/production/config'"
+alias kh="kubectl --kubeconfig='.kube/homolog/config' -n homolog"
+alias khn="kubectl --kubeconfig='.kube/homolog/config'"
+alias hp="helm --kubeconfig='.kube/production/config' -n production"
+alias hh="helm --kubeconfig='.kube/homolog/config' -n homolog"
+
+alias kubedvs="kubectl --kubeconfig='.kube/op-dev-k8s-config' -n dev-a1"
+alias kubedvi="kubectl --kubeconfig='.kube/op-dev-k8s-config' -n dev-b1"
+
+alias postgresup='/k8s/dev/support/postgres/connect.sh &'
+alias openldapup='/k8s/dev/support/openldap/connect.sh &'
+alias uppo='postgrestup && openldapup'
+alias killpo="kill $(ps aux | egrep 'postgres|openldap' | awk {'print $2'})"
+
+
+#DOTNET
+#alias dotnet='/usr/local/share/dotnet/dotnet'
+
+alias dnb='dotnet build'
+alias dnc='dotnet clean'
+alias dnr='dotnet restore'
+
+alias flutter-ios-deintegrate="flutter clean && cd ios && pod deintegrate && rm -f Podfil* && flutter pub cache repair && flutter pub get && flutter pub upgrade"
+alias fcb="flutter clean && flutter pub get && flutter build"
+alias ngm='ng g m'
+alias ngc='ng g c'
+alias ngs='ng g s'
+alias ngi='ng g interface'
 
 EOF
 ```
