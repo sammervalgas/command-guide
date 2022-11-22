@@ -26,6 +26,7 @@ A bunch of command lines designed to help us day by day, bellow are the summary 
 
 - [ALIAS](#alias)
 - [AWK](#awk)
+- [Angular](#angular)
 - [AUTOCOMPLETE](#AutoComplete)
 - [BOOTABLE_USB](#bootable_usb)
 - [CHECKOS](#checkos)
@@ -151,6 +152,23 @@ echo ' # mappings to have up and down arrow searching through history:
 # mapping to have [Tab] and [Shift]+[Tab] to cycle through all the possible completions:
 "\t": menu-complete
 "\e[Z": menu-complete-backward' >> ~/.inputrc
+```
+
+### ANGULAR ###
+
+```bash
+
+ng generate components <COMPONENT_NAME>
+ng g c <COMPONENT_NAME>
+
+ng generate service <SERVICE_NAME>
+ng g s <SERVICE_NAME>
+
+ng generate module <MODULE_NAME> --routing
+ng g m <MODULE_NAME> --routing
+
+ng generate interface <INTERFACE_HAME>
+
 ```
 
 ### CASE ###
@@ -461,6 +479,7 @@ uniq -d #get duplicates
     git rm [FILE|FOLDER]
   push:
     git push -u origin master
+    git push -u origin $(git rev-parse --abbrev-ref HEAD)
   stash:
     git stash
     git stash apply
@@ -490,6 +509,7 @@ uniq -d #get duplicates
   reset:
     git reset -- [FILE|FOLDER]
     git reset .
+    git clean -df && git reset --hard # Reset Full without return.
   remove:
     git rm -- [FILE|FOLDER]
   rev:
