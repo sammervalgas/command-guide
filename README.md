@@ -156,6 +156,8 @@ alias fe='flutter emulators'
 alias fel='flutter emulators --launch'
 alias fdoc='flutter doctor'
 alias iphone='open -a Simulator'
+alias flutter-ios-deintegrate="flutter clean && cd ios && pod deintegrate && rm -f Podfil* && flutter pub cache repair && flutter pub get && flutter pub upgrade"
+alias fcb="flutter clean && flutter pub get && flutter build"
 
 # K8S
 alias kp="kubectl --kubeconfig='.kube/production/config' -n production"
@@ -181,8 +183,6 @@ alias dnb='dotnet build'
 alias dnc='dotnet clean'
 alias dnr='dotnet restore'
 
-alias flutter-ios-deintegrate="flutter clean && cd ios && pod deintegrate && rm -f Podfil* && flutter pub cache repair && flutter pub get && flutter pub upgrade"
-alias fcb="flutter clean && flutter pub get && flutter build"
 
 #Angular
 alias ngm='ng g m'
